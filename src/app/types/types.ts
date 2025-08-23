@@ -1,6 +1,6 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
-export interface Anime{
+export interface Anime {
   id: number,
   title: string,
   titleJp: string,
@@ -32,6 +32,8 @@ export interface AnimeNewsCard {
 }
 
 export interface AnimeApiResponse {
+  pagination: any;
+  data: any;
   mal_id: number;
   title_english?: string;
   title: string;
