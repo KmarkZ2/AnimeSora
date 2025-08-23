@@ -30,21 +30,3 @@ export interface AnimeNewsCard {
   };
   className?: string;
 }
-
-export interface AnimeApiResponse {
-  pagination: any;
-  data: any;
-  mal_id: number;
-  title_english?: string;
-  title: string;
-  title_japanese: string;
-  genres: { mal_id: number; name: string }[];
-  images: { webp: { large_image_url: string } };
-  type: string;
-  episodes: number;
-  duration: string;
-  themes: { name: string }[];
-  rating: string;
-  source: string;
-  synopsis: string;
-}
