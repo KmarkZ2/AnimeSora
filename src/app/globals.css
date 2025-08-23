@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('../../public/Fonts/Headers/Orbitron/Orbitron-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('../../public/Fonts/Headers/Orbitron/Orbitron-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'NotoSansJP';
+  src: url('../../public/Fonts/JapanType/Noto_Sans_JP/NotoSansJP-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: light;
+}
+@font-face {
+  font-family: 'NotoSansJP';
+  src: url('../../public/Fonts/JapanType/Noto_Sans_JP/NotoSansJP-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NotoSansJP';
+  src: url('../../public/Fonts/JapanType/Noto_Sans_JP/NotoSansJP-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../../public/Fonts/SimpleText/Poppins/Poppins-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: light;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../../public/Fonts/SimpleText/Poppins/Poppins-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../../public/Fonts/SimpleText/Poppins/Poppins-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: bold;
+}
+
+
+/* Кастомні змінні */
+:root {
+  --background: linear-gradient(180deg, #0D0D0F 0%, #121212 100%);
+  --grayColor: #121212;
+}
+
+/* Обнуляючі стилі + фон */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+
+@layer utilities {
+  .scrollbar-custom {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #434343 #E0E0E0; /* Firefox */
+  }
+
+  /* Chrome, Edge, Safari */
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: #5e5e5e;
+    border-radius: 9999px; /* закруглення треку */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #434343;
+    border-radius: 9999px; /* закруглення thumb */
+    border: 2px solid #E0E0E0; /* щоб було видно округлі краї */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background-color: #1f2937;
+  }
+}
