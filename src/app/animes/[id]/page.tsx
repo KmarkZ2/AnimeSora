@@ -9,27 +9,28 @@ export default async function AnimePage({ params }: AnimePageParams) {
   const { id } = await params;
   const anime = await getAnimeById(parseInt(id));
   return (
-    <div className="mt-[30px] w-full pl-[100px]">
-      <div className="flex flex-col gap-[20px]">
-        <h2 className="p-[0px] font-[Poppins] font-bold text-[1.75rem] text-[#E0E0E0]">
+    <div className="md:mt-[30px] mt-[15px] w-full md:pl-[100px] pl-[25px] pr-[10px] pb-[10px]">
+      <div className="flex flex-col md:gap-[20px] gap-[10px]">
+        <h2 className="p-[0px] font-[Poppins] font-bold md:text-[1.75rem] text-[1rem] text-[#E0E0E0]">
           {anime.title}
         </h2>
-        <div className="flex gap-[55px]">
+        <div className="flex md:gap-[55px] gap-[25px]">
           <div className="flex-shrink-0">
             <Image
               src={anime.image}
               alt="Image"
+              sizes="md:250 150"
               width={250}
               height={450}
-              className="rounded-xl object-contain max-h-[500px] w-auto"
+              className="rounded-xl object-contain md:max-h-[500px] max-h-[250px] w-auto"
             />
           </div>
-          <div className="flex flex-col gap-[50px]">
+          <div className="flex flex-col md:gap-[50px] gap-[25px]">
             <div className="">
-              <p className="text-[#B0B0B0] text-[1.5rem] font-[Poppins] font-regular ml-[50px]">
+              <p className="text-[#B0B0B0] md:text-[1.5rem] text-[1rem] font-[Poppins] font-regular md:ml-[50px] ml-[25px]">
                 Information
               </p>
-              <ul className="flex flex-col gap-[3px] mt-[20px] text-[#B0B0B0] text-[1rem] font-[Poppins]">
+              <ul className="flex flex-col gap-[3px] md:mt-[20px] mt-[10px] text-[#B0B0B0] md:text-[1rem] text-[0.75rem] font-[Poppins]">
                 <li>
                   <span className="font-bold">
                     Type: <span className="font-normal">{anime.type}</span>
@@ -90,11 +91,23 @@ export default async function AnimePage({ params }: AnimePageParams) {
                 </li>
               </ul>
             </div>
-            <div className="text-[Poppins] text-[#B0B0B0] font-normal">
-              <p className="text-[1.5rem] ml-[50px]">Synopsis</p>
-              <p className="text-[1rem] mt-[30px]">{anime.synopsis}</p>
+            <div className="hidden md:block text-[Poppins] text-[#B0B0B0] font-normal">
+              <p className="md:text-[1.5rem] text-[1rem] md:ml-[50px] ml-[25px]">
+                Synopsis
+              </p>
+              <p className="md:text-[1rem] text-[0.75rem] md:mt-[30px] mt-[15px]">
+                {anime.synopsis}
+              </p>
             </div>
           </div>
+        </div>
+        <div className="block md:hidden text-[Poppins] text-[#B0B0B0] font-normal">
+          <p className="md:text-[1.5rem] text-[1rem] md:ml-[50px] ml-[25px]">
+            Synopsis
+          </p>
+          <p className="md:text-[1rem] text-[0.75rem] md:mt-[30px] mt-[15px]">
+            {anime.synopsis}
+          </p>
         </div>
       </div>
     </div>

@@ -22,8 +22,8 @@ export default function List({
   onPrevHande,
 }: ListParams) {
   return (
-    <div className="flex flex-col gap-[20px] justify-center">
-      <div className="flex flex-row flex-wrap justify-center gap-[50px]">
+    <div className="flex flex-col md:gap-[20px] gap-[10px] justify-center">
+      <div className="flex flex-row flex-wrap justify-center md:gap-[50px] gap-[25px]">
         {displayedList.map((el) => (
           <Link href={`./animes/${el.id}`} key={`${el.id}-${el.title}`}>
             <AnimeCard {...el} />
@@ -31,14 +31,14 @@ export default function List({
         ))}
       </div>
       {displayedList.length > 1 && (
-        <div className="flex justify-center items-center gap-[20px]">
+        <div className="flex justify-center items-center md:gap-[20px] gap-[10px]">
           <Button
             disabled={page === 1}
             text={"Prev"}
             bgColor={"#002A79"}
             onClick={onPrevHande}
           />
-          <span className="text-[1rem] font-[Poppins] font-normal text-[#B0B0B0] text-center">
+          <span className="md:text-[1rem] text-[0.5rem] font-[Poppins] font-normal text-[#B0B0B0] text-center">
             {page}/{totalPages}
           </span>
           <Button

@@ -20,7 +20,7 @@ export default function Button({
   return (
     <button
       type="button"
-      className={`text-ellipsis overflow-hidden p-[5px] rounded-[10px] w-[100px] h-[56px] text-[#E0E0E0] font-[Poppins] font-bold text-[1rem] cursor-pointer ${className}`}
+      className={`text-center overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-box-orient:horizontal] p-[5px] rounded-[10px] md:w-[100px] w-[60px] md:h-[56px] h-[33px] text-[#E0E0E0] font-[Poppins] font-bold md:text-[1rem] text-[0.5rem] cursor-pointer ${className}`}
       style={{
         background: toglebtn?.isActive ? toglebtn.activeBgColor : bgColor,
       }}

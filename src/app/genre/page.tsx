@@ -57,7 +57,7 @@ export default function Genres() {
   }, []);
 
   return (
-    <div className="md:p-[50px] p-[5px] flex flex-col items-center">
+    <div className="md:p-[50px] p-[5px] pt-[10px] flex flex-col items-center">
       <div className="flex flex-col gap-[10px] md:gap-[30px]">
         <div className="flex justify-center w-full">
           <input
@@ -65,10 +65,10 @@ export default function Genres() {
             onChange={(e) => setSearchInput(e.target.value)}
             type="text"
             placeholder="Search"
-            className="bg-none border-[#121212] md:border-[5px] rounded-[10px] text-center h-[45px] max-w-[580px] w-full text-[#E0E0E0] text-[1rem] font-[Poppins] font-normal"
+            className="bg-none border-[#121212] md:border-[5px] border-[2px] rounded-[10px] text-center md:h-[45px] md:max-w-[580px] w-full max-w-[350px] h-[30px] text-[#E0E0E0] md:text-[1rem] text-[0.75rem] font-[Poppins] font-normal"
           />
         </div>
-        <div className="flex gap-[20px] flex-wrap">
+        <div className="flex md:gap-[20px] gap-[10px] flex-wrap">
           {displayedGenres.map((el) => (
             <Button
               key={`${el.id}-${el.name}`}
@@ -88,7 +88,7 @@ export default function Genres() {
               onClick={() => {
                 setIsOpen(!isOpen);
               }}
-              className="text-[1.25rem]"
+              className="md:text-[1.25rem] text-[1rem]"
             />
           )}
         </div>
@@ -117,9 +117,9 @@ export default function Genres() {
         text={"Search"}
         bgColor={"#790035"}
         onClick={() => onSearchHandle()}
-        className="w-[150px] h-[60px] mt-[30px]"
+        className="md:w-[150px] md:h-[60px] md:mt-[30px] w-[100px] h-[40px] mt-[15px]"
       />
-      <div className="mt-[50px]">
+      <div className="md:mt-[50px] mt-[25px]">
         {searchParameter.genres.length < 1 &&
         searchParameter.searchInput === "" ? (
           <Recomendations />
