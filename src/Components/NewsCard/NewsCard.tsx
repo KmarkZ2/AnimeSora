@@ -1,4 +1,3 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image, { StaticImageData } from "next/image";
 import Button from "../Button";
 import Link from "next/link";
@@ -38,7 +37,11 @@ export default function NewsCard(card: AnimeNewsCard) {
         </div>
         <div className="flex justify-end mt-auto">
           <Link href={`./movie/${card.anime.id}`}>
-            <Button text={"Watch →"}></Button>
+            <Button
+              text={"Watch →"}
+              bgColor={"#225EB8"}
+              onClick={() => {}}
+            ></Button>
           </Link>
         </div>
       </div>
