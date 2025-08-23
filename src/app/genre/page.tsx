@@ -2,7 +2,7 @@
 
 import Button from "@/Components/Button";
 import { getGenresAnime } from "../service/apiAnimeFetch";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { Genre } from "../types/types";
 import ListFilter from "@/Components/List/Filter";
 import Recomendations from "@/Components/List/Recomendations";

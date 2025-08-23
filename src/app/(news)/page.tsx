@@ -1,6 +1,3 @@
-import NewsCard from "@/Components/NewsCard/NewsCard";
-import { AnimeNewsCard } from "../types/types";
-
 export default function News() {
   /*
     const news: AnimeNewsCard[] = getAnimeNews();
