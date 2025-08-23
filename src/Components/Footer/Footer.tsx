@@ -20,10 +20,22 @@ export default function Footer() {
           </p>
           <ul className="flex flex-col md:gap-[10px] gap-[5px] md:text-[1rem] text-[0.5rem]">
             <li>
-              <a href="/">Telegram</a>
+              <a
+                href="https://t.me/decoili"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Telegram
+              </a>
             </li>
             <li>
-              <a href="/">Instagram</a>
+              <a
+                href="https://discord.com/channels/meight0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Discord
+              </a>
             </li>
           </ul>
         </div>
