@@ -25,14 +25,17 @@ export async function fetcher(url: string) {
     try {
         const res = await api.get(url);
         return res.data;
-    } catch (error: any) {
-        if(error.response){
-            console.log('Помилка від сервера', error.response.status, error.response.data);
-        }else if(error.request){
-            console.log('Немає відповіді від сервера', error.request);
-        }else{
-            console.log("Проблема в axios",error.message)
+    } catch (error: unknown) {
+        if(axios.isAxiosError(error)){
+            if(error.response){
+                console.log('Помилка від сервера', error.response.status, error.response.data);
+            }else if(error.request){
+                console.log('Немає відповіді від сервера', error.request);
+            }else{
+                console.log("Проблема в axios",error.message)
+            }
         }
+        
         return [];
     }
 }

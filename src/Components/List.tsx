@@ -1,7 +1,6 @@
 "use client";
 
 import { Anime } from "@/app/types/types";
-import { useState } from "react";
 import AnimeCard from "./AnimeCard";
 import Button from "./Button";
 import Link from "next/link";
