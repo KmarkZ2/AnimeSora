@@ -1,10 +1,21 @@
+"use client";
+
+import { getNews } from "@/lib/createNews";
+import { useEffect, useState } from "react";
+
 export default function News() {
-  /*
-    const news: AnimeNewsCard[] = getAnimeNews();
-  */
+  const [news, setNews] = useState<any>();
+  useEffect(() => {
+    const main = async () => {
+      const data = await getNews();
+      setNews(data);
+    };
+    main();
+  }, []);
 
   return (
-    <div className="pt-[50px] pl-[278px] pr-[277px] pb-[50px] flex flex-col items-center gap-[100px]">
+    <div className="md:pt-[50px] pt-[25px] pl-[278px] pr-[277px] md:pb-[50px] pb-[25px] flex flex-col items-center md:gap-[100px] gap-[50px]">
+      <pre>{JSON.stringify(news, null, 2)}</pre>
       {/* {news.map(el=>{
       return <NewsCard card={el}/>})} */}
       {/* <NewsCard

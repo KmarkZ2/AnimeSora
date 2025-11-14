@@ -1,3 +1,4 @@
+import { Timestamp } from "next/dist/server/lib/cache-handlers/types";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 export interface Anime {
@@ -29,4 +30,13 @@ export interface AnimeNewsCard {
     text: string;
   };
   className?: string;
+}
+
+export interface NewsInfo {
+  id: string,
+  created_at: Timestamp
+  title: string,
+  content: string,
+  image: string,
+
 }
