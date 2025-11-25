@@ -1,4 +1,4 @@
-import { Anime } from "@/app/types/types";
+import { Anime } from "@/types/types";
 import Image from "next/image";
 
 export default function AnimeCard(anime: Anime) {

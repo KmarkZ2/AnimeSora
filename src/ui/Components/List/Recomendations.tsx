@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import List from "../List";
-import { Anime } from "@/app/types/types";
-import { getAnimeTop } from "@/app/service/apiAnimeFetch";
+import { Anime } from "@/types/types";
+import { getAnimeTop } from "@/service/apiAnimeFetch";
 
 export default function Recomendations() {
   const [page, setPage] = useState(1);

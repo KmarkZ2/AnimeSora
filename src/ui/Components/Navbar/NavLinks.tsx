@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const Links = {
   navbar: [
     { href: "/", label: "News" },
-    { href: "/genre", label: "Genre" },
+    { href: "/search", label: "Search" },
     { href: "/random", label: "Random" },
   ],
   profile: [

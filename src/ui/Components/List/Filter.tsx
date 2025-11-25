@@ -1,8 +1,8 @@
 "use client";
 
-import { getAnimeByFilter } from "@/app/service/apiAnimeFetch";
-import { Anime, Genre } from "@/app/types/types";
-import { SearchParameters } from "@/app/genre/page";
+import { getAnimeByFilter } from "@/service/apiAnimeFetch";
+import { Anime, Genre } from "@/types/types";
+import { SearchParameters } from "@/app/search/page";
 import { useEffect, useState } from "react";
 import List from "../List";
 

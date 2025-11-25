@@ -1,6 +1,6 @@
 "use client";
 
-import { Anime } from "@/app/types/types";
+import { Anime } from "@/types/types";
 import AnimeCard from "./AnimeCard";
 import Button from "./Button";
 import Link from "next/link";

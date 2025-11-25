@@ -1,4 +1,4 @@
-import { getAnimeById } from "../../service/apiAnimeFetch";
+import { getAnimeById } from "../../../service/apiAnimeFetch";
 import Image from "next/image";
 
 type AnimePageParams = {

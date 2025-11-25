@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Button from "../Button";
 import Link from "next/link";
-import { AnimeNewsCard } from "@/app/types/types";
+import { AnimeNewsCard } from "@/types/types";
 
 export default function NewsCard(card: AnimeNewsCard) {
   return (

@@ -1,11 +1,12 @@
 "use client";
 
-import Button from "@/Components/Button";
-import { getGenresAnime } from "../service/apiAnimeFetch";
+import Button from "@/ui/Components/Button";
+import { getGenresAnime } from "../../service/apiAnimeFetch";
 import { useEffect, useState } from "react";
-import { Genre } from "../types/types";
-import ListFilter from "@/Components/List/Filter";
-import Recomendations from "@/Components/List/Recomendations";
+import { Genre } from "../../types/types";
+import ListFilter from "@/ui/Components/List/Filter";
+import Recomendations from "@/ui/Components/List/Recomendations";
+import Input from "@/ui/Search/Input";
 
 export type SearchParameters = {
   genres: Genre[];
@@ -14,8 +15,7 @@ export type SearchParameters = {
 };
 
 export default function Genres() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [genres, setGenres] = useState<Genre[]>([]);
+  // const [genres, setGenres] = useState<Genre[]>([]);
   const [searchInput, setSearchInput] = useState("");
 
   const [selectedButton, setSelectedButtons] = useState<Genre[]>([]);
@@ -24,8 +24,6 @@ export default function Genres() {
     genres: [],
     type: "Anime",
   });
-
-  const displayedGenres = isOpen ? genres : genres.slice(0, 8);
 
   const onGenreHandle = (genre: Genre) => {
     setSelectedButtons((prev) => {
@@ -50,25 +48,23 @@ export default function Genres() {
     }));
   };
 
-  useEffect(() => {
-    getGenresAnime().then((data) => {
-      setGenres(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getGenresAnime().then((data) => {
+  //     setGenres(data);
+  //   });
+  // }, []);
 
   return (
     <div className="md:p-[50px] p-[5px] pt-[10px] flex flex-col items-center">
       <div className="flex flex-col gap-[10px] md:gap-[30px]">
         <div className="flex justify-center w-full">
-          <input
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            type="text"
+          <Input
+            input={searchInput}
+            setInput={setSearchInput}
             placeholder="Search"
-            className="bg-none border-[#121212] md:border-[5px] border-[2px] rounded-[10px] text-center md:h-[45px] md:max-w-[580px] w-full max-w-[350px] h-[30px] text-[#E0E0E0] md:text-[1rem] text-[0.75rem] font-[Poppins] font-normal"
           />
         </div>
-        <div className="flex md:gap-[20px] gap-[10px] flex-wrap">
+        {/* <div className="flex md:gap-[20px] gap-[10px] flex-wrap">
           {displayedGenres.map((el) => (
             <Button
               key={`${el.id}-${el.name}`}
@@ -91,7 +87,7 @@ export default function Genres() {
               className="md:text-[1.25rem] text-[1rem]"
             />
           )}
-        </div>
+        </div> */}
         {/* <div className="flex flex-row gap-[20px]">
           <Button
             text={"Anime"}
