@@ -2,7 +2,7 @@
 
 import { Anime } from "@/types/types";
 import AnimeCard from "./AnimeCard";
-import Button from "./Button";
+import Button from "../Button";
 import Link from "next/link";
 
 type ListParams = {
