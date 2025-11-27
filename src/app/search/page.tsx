@@ -23,12 +23,12 @@ export default async function Genres({ searchParams }: GenresProps) {
 
   const searchParameter: SearchParameters = {
     searchInput: title || "",
-    genres: genres.filter((g) => genre.includes(g.name)),
+    genres: genre ? genres.filter((g) => genre.includes(g.name)) : [],
   };
 
   return (
     <div className="md:p-[50px] p-[5px] pt-[10px] flex flex-col items-center">
-      <SearchComponent genres={[]} />
+      <SearchComponent genres={genres} searchParams={searchParams} />
       <Suspense fallback>{/* <AnimeLoader /> */}</Suspense>
       {/* <div className="md:mt-[50px] mt-[25px]">
         {searchParameter.genres.length < 1 &&

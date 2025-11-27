@@ -8,9 +8,19 @@ import GenreWindow from "./Genre";
 
 type SearchComponentProps = {
   genres: Genre[];
+  searchParams: {
+    genre: string[];
+    title: string;
+  };
 };
 
-export default function SearchComponent({ genres }: SearchComponentProps) {
+export default function SearchComponent({
+  genres,
+  searchParams,
+}: SearchComponentProps) {
+  const [genresState, setGenresState] = useState<
+    { genre: Genre; isActive: boolean }[]
+  >([]);
   const [searchInput, setSearchInput] = useState("");
 
   const onSearchHandle = () => {};
@@ -24,14 +34,11 @@ export default function SearchComponent({ genres }: SearchComponentProps) {
           setInput={setSearchInput}
           placeholder="Enter title"
         />
-        {/* <Filters/> */}
-      </div>
-      <div>
         <Button
           text={"Search"}
           bgColor={"#790035"}
           onClick={() => onSearchHandle()}
-          className="md:w-[150px] md:h-[60px] md:mt-[30px] w-[100px] h-[40px] mt-[15px]"
+          className="md:w-[150px] md:h-[60px] w-[100px] h-[40px]"
         />
       </div>
     </div>

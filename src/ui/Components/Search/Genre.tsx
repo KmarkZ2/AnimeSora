@@ -21,7 +21,7 @@ export default function GenreWindow() {
       <Button
         bgColor="#006B79"
         onClick={onOpenGenreModal}
-        text="Close"
+        text="Genres"
         toglebtn={{ activeBgColor: "#790069", isActive: isGenreModalOpen }}
       />
       <GenreModal isOpen={isGenreModalOpen} onClose={onCloseGenreModal} />
