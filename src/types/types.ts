@@ -21,6 +21,11 @@ export interface Genre {
   name: string;
 }
 
+export type GenreState = {
+  genre: Genre;
+  isActive: boolean
+}
+
 export interface AnimeNewsCard {
   anime: Anime
   image: string | StaticImport;

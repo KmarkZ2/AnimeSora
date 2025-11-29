@@ -1,5 +1,5 @@
 import { getGenresAnime } from "@/service/apiAnimeFetch";
-import { Genre } from "../../types/types";
+import { Genre, GenreState } from "../../types/types";
 import ListFilter from "@/ui/Components/List/Filter";
 import Recomendations from "@/ui/Components/List/Recomendations";
 import SearchComponent from "@/ui/Components/Search/SearchComponent";
@@ -21,14 +21,20 @@ export default async function Genres({ searchParams }: GenresProps) {
   const { genre, title } = await searchParams;
   const genres = await getGenresAnime();
 
+  const genresList: GenreState[] = genre
+    ? genres.map((g) => {
+        return genre.includes(g.name) ? { genre: g, isActive: true } : { genre: g, isActive: false };
+      })
+    : genres.map((el) => ({ genre: el, isActive: false }));
+
   const searchParameter: SearchParameters = {
-    searchInput: title || "",
-    genres: genre ? genres.filter((g) => genre.includes(g.name)) : [],
+    searchInput: "",
+    genres: [],
   };
 
   return (
     <div className="md:p-[50px] p-[5px] pt-[10px] flex flex-col items-center">
-      <SearchComponent genres={genres} searchParams={searchParams} />
+      <SearchComponent genres={genresList} />
       <Suspense fallback>{/* <AnimeLoader /> */}</Suspense>
       {/* <div className="md:mt-[50px] mt-[25px]">
         {searchParameter.genres.length < 1 &&

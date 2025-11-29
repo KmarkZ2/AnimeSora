@@ -3,8 +3,15 @@
 import Button from "@/ui/Button";
 import { useState } from "react";
 import GenreModal from "./GenreModal";
+import { GenreState } from "@/types/types";
 
-export default function GenreWindow() {
+export default function GenreWindow({
+  genresState,
+  onGenreToggle,
+}: {
+  genresState: GenreState[];
+  onGenreToggle: (genre_id: number) => void;
+}) {
   const [isGenreModalOpen, setIsGenreModalOpen] = useState(false);
 
   const onOpenGenreModal = () => {
@@ -24,7 +31,12 @@ export default function GenreWindow() {
         text="Genres"
         toglebtn={{ activeBgColor: "#790069", isActive: isGenreModalOpen }}
       />
-      <GenreModal isOpen={isGenreModalOpen} onClose={onCloseGenreModal} />
+      <GenreModal
+        isOpen={isGenreModalOpen}
+        onClose={onCloseGenreModal}
+        genresState={genresState}
+        onGenreToggle={onGenreToggle}
+      />
     </div>
   );
 }
