@@ -109,9 +109,10 @@ export async function getGenresAnime(): Promise<Genre[]> {
     }
 }
 
-export async function getAnimeByFilter(genres: Genre[] = [], q: string = '', page: number = 1): Promise<{ animelist: Anime[], pagination: { last_visible_page: number, current_page: number, items: { per_page: number } } } | 'bad request'> {
+export async function getAnimeByFilter(genres: Genre[] = [], q: string = '', page: number = 1, limit: number = 30): Promise<{ animelist: Anime[], pagination: { last_visible_page: number, current_page: number, items: { per_page: number } } } | 'bad request'> {
+    "use server"
     try {
-        const res = await fetcher(`/anime?q=${q}&genres=${genres.map(el => el.id)}&page=${page}`);
+        const res = await fetcher(`/anime?q=${q}&genres=${genres.map(el => el.id)}&page=${page}&limit=${limit}`);
         const animes = res.data.map((el: any) => setAnime(el))
         return {
             animelist: animes,

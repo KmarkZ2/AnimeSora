@@ -5,6 +5,7 @@ import Button from "@/ui/Button";
 import Input from "@/ui/Input";
 import { useState } from "react";
 import GenreWindow from "./Genre";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type SearchComponentProps = {
   genres: GenreState[];
@@ -13,8 +14,21 @@ type SearchComponentProps = {
 export default function SearchComponent({ genres }: SearchComponentProps) {
   const [genresState, setGenresState] = useState<GenreState[]>(genres);
   const [searchInput, setSearchInput] = useState("");
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-  const onSearchHandle = () => {};
+  const onSearchHandle = () => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (searchInput) {
+      params.set("query", searchInput);
+    } else {
+      params.delete("query");
+    }
+    params.set("genre", genresState.join(""));
+
+    router.push(`search?${params.toString()}`);
+  };
 
   const onGenreToggle = (genre_id: number) => {
     setGenresState((prev) =>
