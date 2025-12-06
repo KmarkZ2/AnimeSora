@@ -25,7 +25,9 @@ export default function SearchComponent({ genres }: SearchComponentProps) {
     } else {
       params.delete("query");
     }
-    params.set("genre", genresState.join(""));
+    params.delete("genre");
+    const newGenresArray: string[] = [...genresState.filter((el) => el.isActive).map((el) => el.genre.name)];
+    newGenresArray.map((el) => params.append("genre", el));
 
     router.push(`search?${params.toString()}`);
   };

@@ -15,7 +15,7 @@ type GenreModalProps = {
 export default function GenreModal({ isOpen, onClose, genresState, onGenreToggle }: GenreModalProps) {
   if (!isOpen) return null;
   return (
-    <div className="absolute top-full min-w-[1000px]">
+    <div className="absolute top-full min-w-[1000px] z-50">
       <BGBlock className="p-2.5">
         <div className="flex flex-row flex-wrap gap-2.5 overflow-y-auto">
           {genresState.map((genre) => (

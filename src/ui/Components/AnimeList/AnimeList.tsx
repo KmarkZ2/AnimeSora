@@ -1,32 +1,61 @@
-import { Anime } from "@/types/types";
-import Button from "@/ui/Button";
-import Link from "next/link";
-import AnimeCard from "../AnimeCard";
+"use client";
+
 import { useState } from "react";
+import { Anime, AnimeData } from "@/types/types";
+
+import Link from "next/link";
+import Button from "@/ui/Button";
+import AnimeCard from "../AnimeCard";
 
 type AnimeListProps = {
-  animes: {
-    animelist: Anime[];
-    pagination: { last_visible_page: number; current_page: number; items: { per_page: number } };
-  };
+  initialAnimes: AnimeData;
+  loadMore: (page: number) => Promise<AnimeData | "bad request">;
 };
 
-export default function AnimeList({ animes }: AnimeListProps) {
-  const [anime, setAnime] = useState<Anime[]>();
+export default function AnimeList({ initialAnimes, loadMore }: AnimeListProps) {
+  const [animes, setAnimes] = useState<Anime[]>([...initialAnimes.animelist]);
+  const [page, setPage] = useState<number>(1);
+  const [hasNextPage, setHasNextPage] = useState<boolean>(
+    initialAnimes.pagination.current_page !== initialAnimes.pagination.last_visible_page
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const onLoadMoreHandler = async () => {
+    setIsLoading(true);
+    const nextPage = page + 1;
+
+    try {
+      const loadedData = await loadMore(nextPage);
+      if (typeof loadedData !== "string") {
+        setAnimes((prev) => [...prev, ...loadedData.animelist]);
+        setPage(nextPage);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <div className="md:mt-[50px] mt-[25px]">
-      <div className="flex flex-col md:gap-[20px] gap-[10px] justify-center">
+      <div className="flex flex-col md:gap-[20px] gap-[10px] justify-center items-center">
         <div className="flex flex-row flex-wrap justify-center md:gap-[50px] gap-[25px]">
-          {animes.animelist.map((anime) => {
+          {animes.map((anime) => {
             return (
-              <Link href={`./animes/${anime.title}`}>
+              <Link href={`./animes/${anime.id}`} key={anime.id}>
                 <AnimeCard {...anime} />
               </Link>
             );
           })}
         </div>
-        <Button bgColor="#790069" onClick={} text="See more" className="px-10 py-[15px] font-normal" />
+        {hasNextPage && (
+          <Button
+            bgColor="#790069"
+            onClick={onLoadMoreHandler}
+            text={!isLoading ? "Load more" : "Loading..."}
+            className="px-10 py-[15px] font-normal md:w-auto"
+          />
+        )}
       </div>
     </div>
   );

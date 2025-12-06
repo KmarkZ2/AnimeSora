@@ -24,6 +24,7 @@ export default function Recomendations() {
 
   return (
     <div>
+      Anime
       <List
         displayedList={animeList}
         page={page}

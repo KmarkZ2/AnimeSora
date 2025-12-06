@@ -1,18 +1,37 @@
 import { SearchParameters } from "@/app/search/page";
-import { getAnimeByFilter } from "@/service/apiAnimeFetch";
+import { getAnimeByFilter, getAnimeTop } from "@/service/apiAnimeFetch";
 import AnimeList from "./AnimeList";
-import Recomendations from "../List/Recomendations";
 
 type AnimeLoaderProps = {
   searchParams: SearchParameters;
 };
 
 export default async function AnimeLoader({ searchParams }: AnimeLoaderProps) {
-  const animes = await getAnimeByFilter(searchParams.genres, searchParams.searchInput);
+  console.log(searchParams.genres);
+  const listKey = JSON.stringify(searchParams);
 
-  if (typeof animes === "string" || animes.animelist.length < 1) {
-    return <Recomendations />;
+  async function loadMoreAnime(page: number) {
+    "use server";
+    return await getAnimeByFilter(searchParams.genres, searchParams.searchInput, page);
+  }
+  async function LoadMoreRecomendations(page: number) {
+    "use server";
+    return await getAnimeTop(page);
   }
 
-  return <AnimeList animes={animes} />;
+  if (searchParams.genres.length < 1 && searchParams.searchInput === "") {
+    const recomendations = await getAnimeTop(1);
+    if (typeof recomendations === "string") {
+      return <div>Error load</div>;
+    }
+    return <AnimeList initialAnimes={recomendations} loadMore={LoadMoreRecomendations} key={listKey} />;
+  }
+
+  const initialAnimes = await getAnimeByFilter(searchParams.genres, searchParams.searchInput);
+  if (typeof initialAnimes === "string") {
+    return <div>Error load</div>;
+  } else if (initialAnimes.animelist.length < 1) {
+    return <div>Nothing found</div>;
+  }
+  return <AnimeList initialAnimes={initialAnimes} loadMore={loadMoreAnime} key={listKey} />;
 }

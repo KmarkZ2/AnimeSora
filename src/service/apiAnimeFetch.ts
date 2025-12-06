@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import axios from "axios";
-import { Anime, Genre } from "../types/types";
+import { Anime, AnimeData, Genre } from "../types/types";
 import axiosRetry from "axios-retry";
 
 const api = axios.create({
@@ -20,13 +20,13 @@ axiosRetry(api, {
             error.response.status === 429     // 5xx помилки
         );
     },
+
 });
 
 
 export async function fetcher(url: string) {
     try {
         const res = await api.get(url);
-        console.log('fetcher ', res)
         return res.data;
     } catch (error: any) {
         if (error.response) {
@@ -51,7 +51,7 @@ export async function getAnimeByQuery(q: string) {
     return await res.json();
 }
 
-export async function getAnimeTop(page: number = 1): Promise<{ animelist: Anime[], pagination: { last_visible_page: number, current_page: number, items: { per_page: number } } } | 'bad request'> {
+export async function getAnimeTop(page: number = 1): Promise<AnimeData | 'bad request'> {
     try {
         const data = await fetcher(`/top/anime?page=${page}`);
         const animes: Anime[] = data.data.map((el: any) => setAnime(el));
@@ -71,7 +71,7 @@ export async function getAnimeTop(page: number = 1): Promise<{ animelist: Anime[
     }
 }
 
-export async function getAnimeByGenres(genres: Genre[], page: number = 1): Promise<{ animelist: Anime[], pagination: { last_visible_page: number, current_page: number, items: { per_page: number } } }> {
+export async function getAnimeByGenres(genres: Genre[], page: number = 1): Promise<AnimeData> {
     const res = await fetcher(`/anime?genres=${genres.map(el => el.id + ', ')}&page=${page}&limit='24`);
     const data = await res.json();
     return {
@@ -109,8 +109,7 @@ export async function getGenresAnime(): Promise<Genre[]> {
     }
 }
 
-export async function getAnimeByFilter(genres: Genre[] = [], q: string = '', page: number = 1, limit: number = 30): Promise<{ animelist: Anime[], pagination: { last_visible_page: number, current_page: number, items: { per_page: number } } } | 'bad request'> {
-    "use server"
+export async function getAnimeByFilter(genres: Genre[] = [], q: string = '', page: number = 1, limit: number = 25): Promise<AnimeData | 'bad request'> {
     try {
         const res = await fetcher(`/anime?q=${q}&genres=${genres.map(el => el.id)}&page=${page}&limit=${limit}`);
         const animes = res.data.map((el: any) => setAnime(el))

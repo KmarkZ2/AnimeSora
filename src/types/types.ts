@@ -45,3 +45,14 @@ export interface NewsInfo {
   image: string,
 
 }
+
+export type AnimeData = {
+  animelist: Anime[],
+  pagination: {
+    last_visible_page: number,
+    current_page: number,
+    items: {
+      per_page: number
+    }
+  }
+}

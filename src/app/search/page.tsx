@@ -31,10 +31,12 @@ export default async function Genres({ searchParams }: GenresProps) {
     genres: genre ? genres.filter((g) => genre.includes(g.name)) : [],
   };
 
+  console.log(searchParameter.genres);
+
   return (
     <div className="md:p-[50px] p-[5px] pt-[10px] flex flex-col items-center">
       <SearchComponent genres={genresList} />
-      <Suspense fallback>
+      <Suspense>
         <AnimeLoader searchParams={searchParameter} />
       </Suspense>
     </div>
