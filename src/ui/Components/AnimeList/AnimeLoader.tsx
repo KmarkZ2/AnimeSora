@@ -7,7 +7,6 @@ type AnimeLoaderProps = {
 };
 
 export default async function AnimeLoader({ searchParams }: AnimeLoaderProps) {
-  console.log(searchParams.genres);
   const listKey = JSON.stringify(searchParams);
 
   async function loadMoreAnime(page: number) {

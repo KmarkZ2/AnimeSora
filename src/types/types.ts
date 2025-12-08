@@ -26,27 +26,12 @@ export type GenreState = {
   isActive: boolean
 }
 
-export interface AnimeNewsCard {
-  anime: Anime
-  image: string | StaticImport;
-  text: string;
-  color: {
-    shadow: string;
-    text: string;
-  };
-  className?: string;
+export type ApiResponse<T> = {
+  data: T | null,
+  error?: string;
 }
 
-export interface NewsInfo {
-  id: string,
-  created_at: Timestamp
-  title: string,
-  content: string,
-  image: string,
-
-}
-
-export type AnimeData = {
+export type AnimeList = {
   animelist: Anime[],
   pagination: {
     last_visible_page: number,

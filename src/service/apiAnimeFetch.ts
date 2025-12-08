@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import axios from "axios";
-import { Anime, AnimeData, Genre } from "../types/types";
 import axiosRetry from "axios-retry";
+import { Anime, AnimeList, ApiResponse, Genre } from "../types/types";
 
 const api = axios.create({
     baseURL: 'https://api.jikan.moe/v4',
@@ -24,10 +24,10 @@ axiosRetry(api, {
 });
 
 
-export async function fetcher(url: string) {
+export async function fetcher(url: string): Promise<ApiResponse<AnimeList>> {
     try {
         const res = await api.get(url);
-        return res.data;
+        return { data: res.data.data };
     } catch (error: any) {
         if (error.response) {
             console.log('Помилка від сервера', error.response.status, error.response.data);
@@ -36,7 +36,7 @@ export async function fetcher(url: string) {
         } else {
             console.log("Проблема в axios", error.message)
         }
-        return [];
+        return { data: null, error: "Failed to get data" };
     }
 }
 
@@ -46,15 +46,10 @@ export async function getAnimeRandom() {
     return setAnime(data)
 }
 
-export async function getAnimeByQuery(q: string) {
-    const res = await fetcher(`/anime?q=${q}`);
-    return await res.json();
-}
-
 export async function getAnimeTop(page: number = 1): Promise<AnimeData | 'bad request'> {
     try {
-        const data = await fetcher(`/top/anime?page=${page}`);
-        const animes: Anime[] = data.data.map((el: any) => setAnime(el));
+        const res = await fetcher(`/top/anime?page=${page}`);
+        const animes: Anime[] = res.data?.animelist.map((el: any) => setAnime(el));
         return {
             animelist: animes,
             pagination: {
@@ -92,11 +87,6 @@ export async function getAnimeById(id: Anime['id']): Promise<Anime> {
     return setAnime(data);
 }
 
-export async function getAnimeNews() {
-    const res = await fetcher('');
-    return await res.json();
-}
-
 export async function getGenresAnime(): Promise<Genre[]> {
     try {
         const data = await fetcher('/genres/anime');
@@ -109,7 +99,7 @@ export async function getGenresAnime(): Promise<Genre[]> {
     }
 }
 
-export async function getAnimeByFilter(genres: Genre[] = [], q: string = '', page: number = 1, limit: number = 25): Promise<AnimeData | 'bad request'> {
+export async function getAnimeByFilter(genres: Genre[] = [], q: string = '', page: number = 1, limit: number = 25): Promise<ApiResponse<AnimeList>> {
     try {
         const res = await fetcher(`/anime?q=${q}&genres=${genres.map(el => el.id)}&page=${page}&limit=${limit}`);
         const animes = res.data.map((el: any) => setAnime(el))
