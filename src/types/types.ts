@@ -27,17 +27,24 @@ export type GenreState = {
 }
 
 export type ApiResponse<T> = {
-  data: T | null,
+  data: T | null;
   error?: string;
-}
+};
 
-export type AnimeList = {
-  animelist: Anime[],
+export type JikanResponse = {
+  data: any[];
   pagination: {
-    last_visible_page: number,
-    current_page: number,
-    items: {
-      per_page: number
-    }
-  }
+    last_visible_page: number;
+    current_page: number;
+    items: { per_page: number };
+  };
+};
+
+export type AnimeListStructure = {
+  animelist: Anime[];
+  pagination: {
+    last_visible_page: number;
+    current_page: number;
+    items: { per_page: number };
+  };
 }

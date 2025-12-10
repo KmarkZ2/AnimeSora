@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import axiosRetry from "axios-retry";
-import { Anime, AnimeList, ApiResponse, Genre } from "../types/types";
+import { Anime, AnimeListStructure, ApiResponse, Genre, JikanResponse } from "../types/types";
 
 const api = axios.create({
     baseURL: 'https://api.jikan.moe/v4',
@@ -24,10 +24,10 @@ axiosRetry(api, {
 });
 
 
-export async function fetcher(url: string): Promise<ApiResponse<AnimeList>> {
+export async function fetcher<T>(url: string): Promise<ApiResponse<T>> {
     try {
         const res = await api.get(url);
-        return { data: res.data.data };
+        return { data: res.data };
     } catch (error: any) {
         if (error.response) {
             console.log('Помилка від сервера', error.response.status, error.response.data);
@@ -46,76 +46,62 @@ export async function getAnimeRandom() {
     return setAnime(data)
 }
 
-export async function getAnimeTop(page: number = 1): Promise<AnimeData | 'bad request'> {
+export async function getAnimeTop(page: number = 1): Promise<ApiResponse<AnimeListStructure>> {
     try {
-        const res = await fetcher(`/top/anime?page=${page}`);
-        const animes: Anime[] = res.data?.animelist.map((el: any) => setAnime(el));
+        const { data: rawData, error } = await fetcher<JikanResponse>(`/top/anime?page=${page}`);
+        if (error || !rawData) return { data: null, error: "Error to get anime data" }
+        const animes: Anime[] = rawData.data.map((el: any) => setAnime(el));
         return {
-            animelist: animes,
-            pagination: {
-                last_visible_page: data.pagination.last_visible_page,
-                current_page: data.pagination.current_page,
-                items: {
-                    per_page: data.pagination.items.per_page
+            data: {
+                animelist: animes,
+                pagination: {
+                    last_visible_page: rawData.pagination.last_visible_page,
+                    current_page: rawData.pagination.current_page,
+                    items: {
+                        per_page: rawData.pagination.items.per_page
+                    }
                 }
             }
-        };
+        }
     } catch (er) {
         console.log(er)
-        return 'bad request'
+        return { data: null, error: "Error to get anime data" }
     }
 }
 
-export async function getAnimeByGenres(genres: Genre[], page: number = 1): Promise<AnimeData> {
-    const res = await fetcher(`/anime?genres=${genres.map(el => el.id + ', ')}&page=${page}&limit='24`);
-    const data = await res.json();
-    return {
-        animelist: data.data,
-        pagination: {
-            last_visible_page: data.pagination.last_visible_page,
-            current_page: data.pagination.current_page,
-            items: {
-                per_page: data.pagination.items.per_page
-            }
-        }
-    };
-}
-
-export async function getAnimeById(id: Anime['id']): Promise<Anime> {
-    const res = await fetcher(`/anime/${id}`);
-    const data = res.data;
-    return setAnime(data);
-}
-
-export async function getGenresAnime(): Promise<Genre[]> {
+export async function getGenresAnime(): Promise<ApiResponse<Genre[]>> {
     try {
-        const data = await fetcher('/genres/anime');
-        const genres: Genre[] = data.data.map((el: { mal_id: number, name: string }) => ({ id: el.mal_id, name: el.name }));
-        return genres;
+        const { data: rawData, error } = await fetcher<JikanResponse>('/genres/anime');
+        if (error || !rawData) return { data: null, error: "Error to get anime data" }
+        const genres: Genre[] = rawData.data.map((el: { mal_id: number, name: string }) => ({ id: el.mal_id, name: el.name }));
+        return { data: genres };
     }
     catch (er) {
         console.log(er)
-        return [];
+        return { data: null, error: "Error to get anime genres" };
     }
 }
 
-export async function getAnimeByFilter(genres: Genre[] = [], q: string = '', page: number = 1, limit: number = 25): Promise<ApiResponse<AnimeList>> {
+export async function getAnimeByFilter(genres: Genre[] = [], q: string = '', page: number = 1, limit: number = 25): Promise<ApiResponse<AnimeListStructure>> {
     try {
-        const res = await fetcher(`/anime?q=${q}&genres=${genres.map(el => el.id)}&page=${page}&limit=${limit}`);
-        const animes = res.data.map((el: any) => setAnime(el))
+        const { data: rawData, error } = await fetcher<JikanResponse>(`/anime?q=${q}&genres=${genres.map(el => el.id)}&page=${page}&limit=${limit}`);
+        if (error || !rawData) return { data: null, error: "Error to get anime data" }
+        const animes = rawData.data.map((el: any) => setAnime(el))
         return {
-            animelist: animes,
-            pagination: {
-                last_visible_page: res.pagination.last_visible_page,
-                current_page: res.pagination.current_page,
-                items: {
-                    per_page: res.pagination.items.per_page
+            data: {
+                animelist: animes,
+                pagination: {
+                    last_visible_page: rawData.pagination.last_visible_page,
+                    current_page: rawData.pagination.current_page,
+                    items: {
+                        per_page: rawData.pagination.items.per_page
+                    }
                 }
             }
         };
     } catch (error) {
         console.log(error, 'getAnimeByFilter ERROR')
-        return 'bad request';
+        return { data: null, error: "Error to get anime data" };
     }
 
 }
