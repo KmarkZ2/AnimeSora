@@ -11,29 +11,34 @@ export type SearchParameters = {
 
 type GenresProps = {
   searchParams: {
-    genre: string[];
-    title: string;
+    genre?: string[] | string;
+    title?: string;
   };
 };
 
 export default async function Genres({ searchParams }: GenresProps) {
   const { genre, title } = await searchParams;
-  const genres = await getGenresAnime();
+  const { data: genres, error } = await getGenresAnime();
 
-  const genresList: GenreState[] = genre
-    ? genres.map((g) => {
-        return genre.includes(g.name) ? { genre: g, isActive: true } : { genre: g, isActive: false };
-      })
-    : genres.map((el) => ({ genre: el, isActive: false }));
+  const safeGenreList: Genre[] = genres || [];
+  let selectedGenres: string[] = [];
+  if (Array.isArray(genre)) selectedGenres = genre;
+  else if (typeof genre === "string") selectedGenres = [genre];
+
+  const genresUIList: GenreState[] = safeGenreList.map((el) => ({
+    genre: el,
+    isActive: selectedGenres.includes(el.name),
+  }));
 
   const searchParameter: SearchParameters = {
     searchInput: title || "",
-    genres: genre ? genres.filter((g) => genre.includes(g.name)) : [],
+    genres:
+      genresUIList.filter((el) => el.isActive).map((el) => el.genre) || [],
   };
 
   return (
     <div className="md:p-[50px] p-[5px] pt-[10px] flex flex-col items-center">
-      <SearchComponent genres={genresList} />
+      <SearchComponent genres={genresUIList} />
       <Suspense>
         <AnimeLoader searchParams={searchParameter} />
       </Suspense>
