@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Anime, AnimeData } from "@/types/types";
+import { Anime, AnimeListStructure, ApiResponse } from "@/types/types";
 
 import Link from "next/link";
 import Button from "@/ui/Button";
 import AnimeCard from "../AnimeCard";
 
 type AnimeListProps = {
-  initialAnimes: AnimeData;
-  loadMore: (page: number) => Promise<AnimeData | "bad request">;
+  initialAnimes: AnimeListStructure;
+  loadMore: (page: number) => Promise<ApiResponse<AnimeListStructure>>;
 };
 
 export default function AnimeList({ initialAnimes, loadMore }: AnimeListProps) {
@@ -25,11 +25,10 @@ export default function AnimeList({ initialAnimes, loadMore }: AnimeListProps) {
     const nextPage = page + 1;
 
     try {
-      const loadedData = await loadMore(nextPage);
-      if (typeof loadedData !== "string") {
-        setAnimes((prev) => [...prev, ...loadedData.animelist]);
-        setPage(nextPage);
-      }
+      const { data, error } = await loadMore(nextPage);
+      if (!data || error) return <div>Error load</div>;
+      setAnimes((prev) => [...prev, ...data.animelist]);
+      setPage(nextPage);
     } catch (err) {
       console.log(err);
     }
