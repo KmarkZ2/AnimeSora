@@ -18,7 +18,7 @@ type GenresProps = {
 
 export default async function Genres({ searchParams }: GenresProps) {
   const { genre, title } = await searchParams;
-  const { data: genres, error } = await getGenresAnime();
+  const { data: genres } = await getGenresAnime();
 
   const safeGenreList: Genre[] = genres || [];
   let selectedGenres: string[] = [];
@@ -32,8 +32,7 @@ export default async function Genres({ searchParams }: GenresProps) {
 
   const searchParameter: SearchParameters = {
     searchInput: title || "",
-    genres:
-      genresUIList.filter((el) => el.isActive).map((el) => el.genre) || [],
+    genres: genresUIList.filter((el) => el.isActive).map((el) => el.genre) || [],
   };
 
   return (

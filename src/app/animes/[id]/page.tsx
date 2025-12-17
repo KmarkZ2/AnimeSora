@@ -7,13 +7,14 @@ type AnimePageParams = {
 
 export default async function AnimePage({ params }: AnimePageParams) {
   const { id } = await params;
-  const anime = await getAnimeById(parseInt(id));
+  const { data: anime, error } = await getAnimeById(parseInt(id));
+
+  if (error || !anime) return <div>Error to load data</div>;
+
   return (
     <div className="md:mt-[30px] mt-[15px] w-full md:pl-[100px] pl-[25px] pr-[10px] pb-[10px]">
       <div className="flex flex-col md:gap-[20px] gap-[10px]">
-        <h2 className="p-[0px] font-[Poppins] font-bold md:text-[1.75rem] text-[1rem] text-[#E0E0E0]">
-          {anime.title}
-        </h2>
+        <h2 className="p-[0px] font-[Poppins] font-bold md:text-[1.75rem] text-[1rem] text-[#E0E0E0]">{anime.title}</h2>
         <div className="flex md:gap-[55px] gap-[25px]">
           <div className="flex-shrink-0">
             <Image
@@ -38,31 +39,23 @@ export default async function AnimePage({ params }: AnimePageParams) {
                 </li>
                 <li>
                   <span className="font-bold">
-                    Episodes:{" "}
-                    <span className="font-normal">{anime.episodes}</span>
+                    Episodes: <span className="font-normal">{anime.episodes}</span>
                   </span>
                 </li>
                 <li>
                   <span className="font-bold">
-                    Duration:{" "}
-                    <span className="font-normal">{anime.duration}</span>
+                    Duration: <span className="font-normal">{anime.duration}</span>
                   </span>
                 </li>
                 <li>
                   <span className="font-bold">
-                    Genres:{" "}
-                    <span className="font-normal">
-                      {anime.genres.map((el) => el.name).join(", ")}
-                    </span>
+                    Genres: <span className="font-normal">{anime.genres.map((el) => el.name).join(", ")}</span>
                   </span>
                 </li>
                 {anime.theme.length > 0 && (
                   <li>
                     <span className="font-bold">
-                      Theme:{" "}
-                      <span className="font-normal">
-                        {anime.theme.join(", ")}
-                      </span>
+                      Theme: <span className="font-normal">{anime.theme.join(", ")}</span>
                     </span>
                   </li>
                 )}
@@ -79,35 +72,25 @@ export default async function AnimePage({ params }: AnimePageParams) {
                 </li>
                 <li>
                   <span className="font-bold">
-                    Title Jp:{" "}
-                    <span className="font-normal">{anime.titleJp}</span>
+                    Title Jp: <span className="font-normal">{anime.titleJp}</span>
                   </span>
                 </li>
                 <li>
                   <span className="font-bold">
-                    Title Eng:{" "}
-                    <span className="font-normal">{anime.title}</span>
+                    Title Eng: <span className="font-normal">{anime.title}</span>
                   </span>
                 </li>
               </ul>
             </div>
             <div className="hidden md:block text-[Poppins] text-[#B0B0B0] font-normal">
-              <p className="md:text-[1.5rem] text-[1rem] md:ml-[50px] ml-[25px]">
-                Synopsis
-              </p>
-              <p className="md:text-[1rem] text-[0.75rem] md:mt-[30px] mt-[15px]">
-                {anime.synopsis}
-              </p>
+              <p className="md:text-[1.5rem] text-[1rem] md:ml-[50px] ml-[25px]">Synopsis</p>
+              <p className="md:text-[1rem] text-[0.75rem] md:mt-[30px] mt-[15px]">{anime.synopsis}</p>
             </div>
           </div>
         </div>
         <div className="block md:hidden text-[Poppins] text-[#B0B0B0] font-normal">
-          <p className="md:text-[1.5rem] text-[1rem] md:ml-[50px] ml-[25px]">
-            Synopsis
-          </p>
-          <p className="md:text-[1rem] text-[0.75rem] md:mt-[30px] mt-[15px]">
-            {anime.synopsis}
-          </p>
+          <p className="md:text-[1.5rem] text-[1rem] md:ml-[50px] ml-[25px]">Synopsis</p>
+          <p className="md:text-[1rem] text-[0.75rem] md:mt-[30px] mt-[15px]">{anime.synopsis}</p>
         </div>
       </div>
     </div>

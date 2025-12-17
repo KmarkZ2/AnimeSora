@@ -1,5 +1,5 @@
-import { insertNews } from "@/lib/createNews";
-import { useState } from "react";
+// import { insertNews } from "@/lib/createNews";
+// import { useState } from "react";
 
 export default function addNews() {
   // const [title, setTitle] = useState("");
