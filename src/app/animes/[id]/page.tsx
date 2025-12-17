@@ -82,13 +82,13 @@ export default async function AnimePage({ params }: AnimePageParams) {
                 </li>
               </ul>
             </div>
-            <div className="hidden md:block text-[Poppins] text-[#B0B0B0] font-normal">
+            <div className="hidden md:block font-[Poppins] text-[#B0B0B0] font-normal">
               <p className="md:text-[1.5rem] text-[1rem] md:ml-[50px] ml-[25px]">Synopsis</p>
               <p className="md:text-[1rem] text-[0.75rem] md:mt-[30px] mt-[15px]">{anime.synopsis}</p>
             </div>
           </div>
         </div>
-        <div className="block md:hidden text-[Poppins] text-[#B0B0B0] font-normal">
+        <div className="block md:hidden font-[Poppins] text-[#B0B0B0] font-normal">
           <p className="md:text-[1.5rem] text-[1rem] md:ml-[50px] ml-[25px]">Synopsis</p>
           <p className="md:text-[1rem] text-[0.75rem] md:mt-[30px] mt-[15px]">{anime.synopsis}</p>
         </div>
