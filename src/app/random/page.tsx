@@ -2,6 +2,8 @@ import AnimePage from "@/app/animes/[id]/page";
 import { getAnimeRandom } from "../../service/apiAnimeFetch";
 import "@/app/animes/[id]/page";
 
+export const dynamic = "force-dynamic";
+
 export default async function Random() {
   const { data: anime, error } = await getAnimeRandom();
 
