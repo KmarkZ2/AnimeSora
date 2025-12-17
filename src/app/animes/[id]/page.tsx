@@ -5,6 +5,8 @@ type AnimePageParams = {
   params: { id: string };
 };
 
+export const revalidate = 86400;
+
 export default async function AnimePage({ params }: AnimePageParams) {
   const { id } = await params;
   const { data: anime, error } = await getAnimeById(parseInt(id));
