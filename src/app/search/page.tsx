@@ -10,10 +10,10 @@ export type SearchParameters = {
 };
 
 type GenresProps = {
-  searchParams: {
+  searchParams: Promise<{
     genre?: string[] | string;
     title?: string;
-  };
+  }>;
 };
 
 export default async function Genres({ searchParams }: GenresProps) {

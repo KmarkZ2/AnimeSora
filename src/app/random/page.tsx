@@ -3,7 +3,9 @@ import { getAnimeRandom } from "../../service/apiAnimeFetch";
 import "@/app/animes/[id]/page";
 
 export default async function Random() {
-  const anime = await getAnimeRandom();
+  const { data: anime, error } = await getAnimeRandom();
+
+  if (error || !anime) return <div>Error to load data</div>;
 
   return (
     <div>
