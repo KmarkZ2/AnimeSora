@@ -1,6 +1,6 @@
 "use client";
 
-import { Genre, GenreState } from "@/types/types";
+import { GenreState } from "@/types/types";
 import BGBlock from "@/ui/BGBlock";
 import GenreItem from "./GenreItem";
 import Button from "@/ui/Button";

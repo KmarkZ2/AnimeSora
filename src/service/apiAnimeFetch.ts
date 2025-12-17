@@ -119,17 +119,17 @@ export async function getAnimeByFilter(genres: Genre[] = [], q: string = '', pag
 function setAnime(data: JikanAnime): Anime {
     const anime: Anime = {
         id: data.mal_id,
-        title: data.title_english ? data.title_english : data.title,
-        titleJp: data.title_japanese,
-        genres: data.genres.map((el: { mal_id: number; name: string; }) => ({ id: el.mal_id, name: el.name })),
-        image: data.images.webp.large_image_url,
-        type: data.type,
-        episodes: data.episodes,
-        duration: data.duration,
-        theme: data.themes.map((el: { name: string; }) => el.name),
-        rating: data.rating,
-        source: data.source,
-        synopsis: data.synopsis
+        title: data.title_english ?? data.title ?? "Unknown Title",
+        titleJp: data.title_japanese || "",
+        genres: data.genres ? data.genres.map((el) => ({ id: el.mal_id, name: el.name })) : [],
+        image: data.images?.webp?.large_image_url || data.images?.jpg?.large_image_url || "",
+        type: data.type || "TV",
+        episodes: data.episodes || 0,
+        duration: data.duration || "Unknown",
+        theme: data.themes ? data.themes.map((el) => el.name) : [],
+        rating: data.rating || "N/A",
+        source: data.source || "Original",
+        synopsis: data.synopsis || "No description available."
     }
     return anime;
 }
