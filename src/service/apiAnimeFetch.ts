@@ -26,14 +26,19 @@ export async function fetcher<T>(url: string): Promise<ApiResponse<T>> {
     try {
         const res = await api.get(url);
         return { data: res.data };
-    } catch (error: any) {
-        if (error.response) {
-            console.log('Помилка від сервера', error.response.status, error.response.data);
-        } else if (error.request) {
-            console.log('Немає відповіді від сервера', error.request);
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            if (error.response) {
+                console.error('Помилка від сервера', error.response.status, error.response.data);
+            } else if (error.request) {
+                console.error('Немає відповіді від сервера', error.request);
+            } else {
+                console.error("Проблема в axios", error.message);
+            }
         } else {
-            console.log("Проблема в axios", error.message)
+            console.error("Невідома помилка:", error);
         }
+
         return { data: null, error: "Failed to get data" };
     }
 }
