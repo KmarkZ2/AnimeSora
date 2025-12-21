@@ -48,12 +48,9 @@ export default function AnimeList({ initialAnimes, loadMore }: AnimeListProps) {
           })}
         </div>
         {hasNextPage && (
-          <Button
-            bgColor="#790069"
-            onClick={onLoadMoreHandler}
-            text={!isLoading ? "Load more" : "Loading..."}
-            className="px-10 py-[15px] font-normal md:w-auto"
-          />
+          <Button onClick={onLoadMoreHandler} isLoading={isLoading} variant="neon-pink">
+            <span>{!isLoading ? "Load more" : "Loading..."}</span>
+          </Button>
         )}
       </div>
     </div>

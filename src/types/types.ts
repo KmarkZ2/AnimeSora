@@ -1,4 +1,5 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { User as SupabaseUser } from '@supabase/supabase-js';
 
 // === ТИП ДЛЯ JIKAN (ОДНЕ АНІМЕ) ===
 
@@ -121,7 +122,7 @@ export type ApiResponse<T> = {
   error?: string;
 };
 
-// === ТИП ДЛЯ JIKANRESPONSE (ОДНЕ АНІМЕ) ===
+// === ТИП ДЛЯ JIKANRESPONSE ===
 export type JikanAnimeResponse = {
   data: JikanAnime[];
   pagination: {
@@ -138,3 +139,20 @@ export type SingleJikanAnimeResponse = {
 export type JikanGenreResponse = {
   data: JikanResource[];
 };
+
+// === ТИП ДЛЯ SUPABASE ===
+export interface UserProfile {
+  id: string;
+  username: string | null;     // Може бути null, якщо юзер ще не задав нік
+  full_name: string | null;    // Ім'я з реєстрації
+  avatar_url: string | null;   // Посилання на картинку
+  email: string | null;        // Ми дублюємо email сюди для зручності
+  updated_at?: string | null;
+}
+
+export type User = SupabaseUser;
+
+export interface UserWithProfile {
+  user: User | null;         // Системні дані (id, last_sign_in_at)
+  profile: UserProfile | null; // Публічні дані (username, avatar)
+}

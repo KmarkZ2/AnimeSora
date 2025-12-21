@@ -36,9 +36,11 @@ export default async function Genres({ searchParams }: GenresProps) {
   };
 
   return (
-    <div className="md:p-[50px] p-[5px] pt-[10px] flex flex-col items-center">
-      <SearchComponent genres={genresUIList} />
-      <Suspense>
+    <div className="flex flex-col items-center">
+      <div className="md:px-[100px] px-[10px] h-max-[360px] w-full">
+        <SearchComponent genres={genresUIList} />
+      </div>
+      <Suspense fallback={<div>Loading...</div>}>
         <AnimeLoader searchParams={searchParameter} />
       </Suspense>
     </div>

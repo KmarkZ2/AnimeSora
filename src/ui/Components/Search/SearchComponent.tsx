@@ -3,9 +3,10 @@
 import { GenreState } from "@/types/types";
 import Button from "@/ui/Button";
 import Input from "@/ui/Input";
-import { useState } from "react";
+import { startTransition, useState, useTransition } from "react";
 import GenreWindow from "./Genre";
 import { useRouter, useSearchParams } from "next/navigation";
+import GenreModal from "./GenreModal";
 
 type SearchComponentProps = {
   genres: GenreState[];
@@ -14,6 +15,7 @@ type SearchComponentProps = {
 export default function SearchComponent({ genres }: SearchComponentProps) {
   const [genresState, setGenresState] = useState<GenreState[]>(genres);
   const [searchInput, setSearchInput] = useState("");
+  const [isPending, setTransition] = useTransition();
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -29,7 +31,9 @@ export default function SearchComponent({ genres }: SearchComponentProps) {
     const newGenresArray: string[] = [...genresState.filter((el) => el.isActive).map((el) => el.genre.name)];
     newGenresArray.forEach((el) => params.append("genre", el));
 
-    router.push(`search?${params.toString()}`);
+    startTransition(() => {
+      router.push(`search?${params.toString()}`);
+    });
   };
 
   const onGenreToggle = (genre_id: number) => {
@@ -39,16 +43,13 @@ export default function SearchComponent({ genres }: SearchComponentProps) {
   };
 
   return (
-    <div className="flex flex-col md:gap-[30px] gap-[10px] items-center w-full">
-      <div className="flex justify-between items-center w-2/3">
-        <GenreWindow genresState={genresState} onGenreToggle={onGenreToggle} />
+    <div className="md:py-[20px] md:px-[50px] px-[10px] py-[5px] bg-[rgba(18,18,18,0.1)] border-[1px] border-[rgba(255,255,255,0.2)] rounded-[10px] w-full blur-[20px]">
+      <div className="flex flex-col gap-[20px]">
         <Input input={searchInput} setInput={setSearchInput} placeholder="Enter title" />
-        <Button
-          text={"Search"}
-          bgColor={"#790035"}
-          onClick={() => onSearchHandle()}
-          className="md:w-[150px] md:h-[60px] w-[100px] h-[40px]"
-        />
+        <GenreModal genresState={genresState} onGenreToggle={onGenreToggle} />
+        <Button onClick={() => onSearchHandle()} variant="neon-pink" isLoading={isPending}>
+          <span>Search</span>
+        </Button>
       </div>
     </div>
   );
