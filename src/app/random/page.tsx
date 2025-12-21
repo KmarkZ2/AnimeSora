@@ -1,6 +1,7 @@
 import AnimePage from "@/app/animes/[id]/page";
 import { getAnimeRandom } from "../../service/apiAnimeFetch";
 import "@/app/animes/[id]/page";
+import AnimePageComponent from "@/ui/Components/AnimePageComponent";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +12,7 @@ export default async function Random() {
 
   return (
     <div>
-      <AnimePage params={{ id: anime.id.toString() }}></AnimePage>
+      <AnimePageComponent anime={anime}></AnimePageComponent>
     </div>
   );
 }
