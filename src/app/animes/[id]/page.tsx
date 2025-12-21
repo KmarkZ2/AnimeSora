@@ -2,7 +2,7 @@ import { getAnimeById } from "../../../service/apiAnimeFetch";
 import Image from "next/image";
 
 type AnimePageParams = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export const revalidate = 86400;
