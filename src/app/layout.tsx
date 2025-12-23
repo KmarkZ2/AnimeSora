@@ -20,7 +20,7 @@ export default async function RootLayout({
       <body>
         <div className="flex flex-col min-h-screen">
           <Nav user={user} />
-          <main className="flex-1 md:px-[100px] px-[10px]">{children}</main>
+          <main className="flex-1 max-w-[1440px] mx-auto px-4 md:px-8 md:mt-[50px] mt-[25px]">{children}</main>
           <Footer />
         </div>
       </body>

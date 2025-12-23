@@ -41,12 +41,15 @@ export default function SearchComponent({ genres }: SearchComponentProps) {
       prev.map((el) => (el.genre.id === genre_id ? { genre: el.genre, isActive: !el.isActive } : el))
     );
   };
+  const onClearHandler = () => {
+    setGenresState((prev) => prev.map((el) => ({ genre: el.genre, isActive: false })));
+  };
 
   return (
-    <div className="md:py-[20px] md:px-[50px] px-[10px] py-[5px] bg-[rgba(18,18,18,0.1)] border-[1px] border-[rgba(255,255,255,0.2)] rounded-[10px] w-full blur-[20px]">
-      <div className="flex flex-col gap-[20px]">
+    <div className="md:py-[20px] md:px-[50px] px-[10px] py-[5px] bg-[rgba(18,18,18,0.1)] border-[1px] border-[rgba(255,255,255,0.2)] rounded-[10px] w-full backdrop-blur-[20px]">
+      <div className="flex flex-col gap-[30px] items-center">
         <Input input={searchInput} setInput={setSearchInput} placeholder="Enter title" />
-        <GenreModal genresState={genresState} onGenreToggle={onGenreToggle} />
+        <GenreModal genresState={genresState} onGenreToggle={onGenreToggle} onClearHandler={onClearHandler} />
         <Button onClick={() => onSearchHandle()} variant="neon-pink" isLoading={isPending}>
           <span>Search</span>
         </Button>
