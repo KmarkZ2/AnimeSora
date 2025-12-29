@@ -1,10 +1,9 @@
-"use client";
-
 import Link from "next/link";
 import NavLinks from "./NavLinks";
 import ProfileWindow from "../ProfileWindow/ProfileWindow";
 import { User } from "@/types/types";
 import AuthButton from "../AuthButtons/AuthButton";
+import UserMenu from "../ProfileWindow/UserMenu";
 
 export default function Nav({ user }: { user: User | null }) {
   return (
@@ -13,7 +12,7 @@ export default function Nav({ user }: { user: User | null }) {
         <h2 className="text-[#E0E0E0] font-[Orbitron] font-bold md:text-[1.75rem] text-[1rem]">AnimeSora</h2>
       </Link>
       <NavLinks className="flex-2" />
-      <div className="flex-1">{user ? <ProfileWindow /> : <AuthButton />}</div>
+      <div className="flex-1 flex justify-end">{user ? <UserMenu /> : <AuthButton />}</div>
     </nav>
   );
 }

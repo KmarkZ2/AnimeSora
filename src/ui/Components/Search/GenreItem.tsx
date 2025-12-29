@@ -11,7 +11,12 @@ export default function GenreItem({
   onClick: (genre_id: number) => void;
 }) {
   return (
-    <Button onClick={() => onClick(genre_state.genre.id)} variant="filter" isActive={genre_state.isActive}>
+    <Button
+      type="button"
+      onClick={() => onClick(genre_state.genre.id)}
+      variant="filter"
+      isActive={genre_state.isActive}
+    >
       <span className="truncate text-[#B0B0B0]">{genre_state.genre.name}</span>
     </Button>
   );

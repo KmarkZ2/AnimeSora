@@ -4,9 +4,9 @@ import { GenreState } from "@/types/types";
 import Button from "@/ui/Button";
 import Input from "@/ui/Input";
 import { startTransition, useState, useTransition } from "react";
-import GenreWindow from "./Genre";
 import { useRouter, useSearchParams } from "next/navigation";
 import GenreModal from "./GenreModal";
+import ModalBg from "@/ui/ModalBg";
 
 type SearchComponentProps = {
   genres: GenreState[];
@@ -46,7 +46,7 @@ export default function SearchComponent({ genres }: SearchComponentProps) {
   };
 
   return (
-    <div className="md:py-[20px] md:px-[50px] px-[10px] py-[5px] bg-[rgba(18,18,18,0.1)] border-[1px] border-[rgba(255,255,255,0.2)] rounded-[10px] w-full backdrop-blur-[20px]">
+    <ModalBg className="md:py-[20px] md:px-[50px] px-[10px] py-[5px]">
       <div className="flex flex-col gap-[30px] items-center">
         <Input input={searchInput} setInput={setSearchInput} placeholder="Enter title" />
         <GenreModal genresState={genresState} onGenreToggle={onGenreToggle} onClearHandler={onClearHandler} />
@@ -54,6 +54,6 @@ export default function SearchComponent({ genres }: SearchComponentProps) {
           <span>Search</span>
         </Button>
       </div>
-    </div>
+    </ModalBg>
   );
 }

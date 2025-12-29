@@ -3,6 +3,7 @@ import { getGenresAnime } from "@/service/apiAnimeFetch";
 import { Genre, GenreState } from "../../types/types";
 import SearchComponent from "@/ui/Components/Search/SearchComponent";
 import AnimeLoader from "@/ui/Components/AnimeList/AnimeLoader";
+import AnimeListSkeleton from "@/ui/AnimeListSkeleton";
 
 export type SearchParameters = {
   genres: Genre[];
@@ -40,7 +41,7 @@ export default async function Genres({ searchParams }: GenresProps) {
       <div className="w-full">
         <SearchComponent genres={genresUIList} />
       </div>
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<AnimeListSkeleton />}>
         <AnimeLoader searchParams={searchParameter} />
       </Suspense>
     </div>

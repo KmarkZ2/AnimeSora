@@ -156,3 +156,9 @@ export interface UserWithProfile {
   user: User | null;         // Системні дані (id, last_sign_in_at)
   profile: UserProfile | null; // Публічні дані (username, avatar)
 }
+
+export interface UpdateProfileData {
+  full_name?: string;
+  username?: string;
+  avatar_url?: string;
+}

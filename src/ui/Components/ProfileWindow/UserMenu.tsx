@@ -2,22 +2,28 @@
 
 import { useState } from "react";
 import { RxPerson } from "react-icons/rx";
-import BGBlock from "../../BGBlock";
 import ProfileWindow from "./ProfileWindow";
 import clsx from "clsx";
+import ModalBg from "@/ui/ModalBg";
 
 export default function UserMenu({}) {
   const [profileIsOpen, setProfileIsOpen] = useState<boolean>(false);
 
   return (
-    <div>
-      <button type="button" onClick={() => setProfileIsOpen((prev) => !prev)}>
-        <RxPerson className="w-4 h-4" />
+    <div className="relative">
+      {profileIsOpen && <div className="fixed inset-0 z-40" onClick={() => setProfileIsOpen((prev) => !prev)}></div>}
+      <button type="button" className="cursor-pointer" onClick={() => setProfileIsOpen((prev) => !prev)}>
+        <RxPerson className="w-8 h-8 text-white" />
       </button>
-      <div className={clsx("hidden duration-150 top-[calc(100%+10px)] right-0 w-60", profileIsOpen ?? "block")}>
-        <BGBlock>
+      <div
+        className={clsx(
+          "duration-200 absolute top-[calc(100%+10px)] right-0 w-[300px] transition-all ease-in-out z-50",
+          profileIsOpen ? "opacity-100 visible translate-y-0 scale-100" : "opacity-0 invisible -translate-y-2 scale-95"
+        )}
+      >
+        <ModalBg className="p-2.5">
           <ProfileWindow />
-        </BGBlock>
+        </ModalBg>
       </div>
     </div>
   );
