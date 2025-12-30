@@ -4,6 +4,7 @@ import { Genre, GenreState } from "../../types/types";
 import SearchComponent from "@/ui/Components/Search/SearchComponent";
 import AnimeLoader from "@/ui/Components/AnimeList/AnimeLoader";
 import AnimeListSkeleton from "@/ui/AnimeListSkeleton";
+import Image from "next/image";
 
 export type SearchParameters = {
   genres: Genre[];
@@ -13,12 +14,12 @@ export type SearchParameters = {
 type GenresProps = {
   searchParams: Promise<{
     genre?: string[] | string;
-    title?: string;
+    query?: string;
   }>;
 };
 
 export default async function Genres({ searchParams }: GenresProps) {
-  const { genre, title } = await searchParams;
+  const { genre, query } = await searchParams;
   const { data: genres } = await getGenresAnime();
 
   const safeGenreList: Genre[] = genres || [];
@@ -32,13 +33,13 @@ export default async function Genres({ searchParams }: GenresProps) {
   }));
 
   const searchParameter: SearchParameters = {
-    searchInput: title || "",
+    searchInput: query || "",
     genres: genresUIList.filter((el) => el.isActive).map((el) => el.genre) || [],
   };
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-full">
+      <div className="w-full relative">
         <SearchComponent genres={genresUIList} />
       </div>
       <Suspense fallback={<AnimeListSkeleton />}>
