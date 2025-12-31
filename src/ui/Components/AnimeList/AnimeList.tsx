@@ -37,7 +37,7 @@ export default function AnimeList({ initialAnimes, loadMore }: AnimeListProps) {
 
   return (
     <div className="md:mt-[50px] mt-[25px]">
-      <div className="flex flex-col md:gap-[20px] gap-[10px] justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
         <div className="flex flex-row flex-wrap justify-center md:gap-[50px] gap-[25px]">
           {animes.map((anime) => {
             return (
@@ -48,7 +48,7 @@ export default function AnimeList({ initialAnimes, loadMore }: AnimeListProps) {
           })}
         </div>
         {hasNextPage && (
-          <Button onClick={onLoadMoreHandler} isLoading={isLoading} variant="neon-pink">
+          <Button onClick={onLoadMoreHandler} isLoading={isLoading} variant="neon-pink" className="my-7">
             <span>{!isLoading ? "Load more" : "Loading..."}</span>
           </Button>
         )}

@@ -40,7 +40,7 @@ export default async function Genres({ searchParams }: GenresProps) {
   return (
     <div className="flex flex-col items-center">
       <div className="w-full relative">
-        <SearchComponent genres={genresUIList} />
+        <SearchComponent genres={genresUIList} queryInitial={query || ""} />
       </div>
       <Suspense fallback={<AnimeListSkeleton />}>
         <AnimeLoader searchParams={searchParameter} />

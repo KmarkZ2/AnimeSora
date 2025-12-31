@@ -10,13 +10,14 @@ import ModalBg from "@/ui/ModalBg";
 
 type SearchComponentProps = {
   genres: GenreState[];
+  queryInitial: string;
 };
 
-export default function SearchComponent({ genres }: SearchComponentProps) {
-  const [genresState, setGenresState] = useState<GenreState[]>(genres);
-  const [searchInput, setSearchInput] = useState("");
-  const [isPending, setTransition] = useTransition();
+export default function SearchComponent({ genres, queryInitial }: SearchComponentProps) {
   const searchParams = useSearchParams();
+  const [genresState, setGenresState] = useState<GenreState[]>(genres);
+  const [searchInput, setSearchInput] = useState(queryInitial);
+  const [isPending, setTransition] = useTransition();
   const router = useRouter();
 
   const onSearchHandle = () => {
@@ -37,9 +38,7 @@ export default function SearchComponent({ genres }: SearchComponentProps) {
   };
 
   const onGenreToggle = (genre_id: number) => {
-    setGenresState((prev) =>
-      prev.map((el) => (el.genre.id === genre_id ? { genre: el.genre, isActive: !el.isActive } : el))
-    );
+    setGenresState((prev) => prev.map((el) => (el.genre.id === genre_id ? { genre: el.genre, isActive: !el.isActive } : el)));
   };
   const onClearHandler = () => {
     setGenresState((prev) => prev.map((el) => ({ genre: el.genre, isActive: false })));

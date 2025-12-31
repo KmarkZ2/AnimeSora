@@ -67,7 +67,7 @@ export async function updateUser(formData: UpdateProfileData): Promise<ApiRespon
         .eq("id", user.user.id)
         .select()
         .single();
-    if (error) {
+    if (er) {
         return { data: null, error: "Failed to update profile" };
     }
 

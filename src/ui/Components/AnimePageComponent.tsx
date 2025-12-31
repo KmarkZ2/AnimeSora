@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function AnimePageComponent({ anime }: { anime: Anime }) {
   return (
-    <div className="md:mt-[30px] mt-[15px] w-full md:pl-[100px] pl-[25px] pr-[10px] pb-[10px]">
+    <div className="md:mt-[30px] mt-[15px] w-full md:pl-[100px] pl-[25px] pr-[10px] pb-[10px] min-h-screen">
       <div className="flex flex-col md:gap-[20px] gap-[10px]">
         <h2 className="p-[0px] font-[Poppins] font-bold md:text-[1.75rem] text-[1rem] text-[#E0E0E0]">{anime.title}</h2>
         <div className="flex md:gap-[55px] gap-[25px]">
