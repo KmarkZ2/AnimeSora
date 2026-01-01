@@ -28,14 +28,7 @@ export default function ProfileContent({ initialData }: ProfileContentProps) {
 
   return (
     <div className="w-[800px] relative">
-      <div
-        className={clsx(
-          "duration-200 fixed top-[150px] left-1/2 -translate-x-1/2 transition-all ease-in-out z-50 w-[700px]",
-          isEditing ? "opacity-100 visible translate-y-0 scale-100" : "opacity-0 invisible -translate-y-2 scale-95"
-        )}
-      >
-        <ChangeInfo setIsEditing={setIsEditing} />
-      </div>
+      <ChangeInfo setIsEditing={setIsEditing} isEditing={isEditing} />
       <ModalBg className="px-[50px] py-[30px]">
         <div className="font-normal flex items-center gap-8 text-white w-full">
           <div className="flex flex-col items-center gap-2.5 shrink-0">

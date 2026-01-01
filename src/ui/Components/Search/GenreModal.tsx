@@ -23,18 +23,16 @@ export default function GenreModal({ genresState, onGenreToggle, onClearHandler 
         animate={{ height: isShowMore ? "auto" : 200 }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
       >
-        <div className={"flex flex-row flex-wrap justify-center gap-2.5 p-5 duration-200"}>
-          {genresState.map((genre) => (
-            <GenreItem genre_state={genre} onClick={onGenreToggle} key={genre.genre.id} />
-          ))}
+        <div className={"flex flex-row flex-wrap justify-center gap-2.5 p-5 duration-200 "}>
+          {genresState
+            .sort((a, b) => a.genre.name.localeCompare(b.genre.name))
+            .map((genre) => (
+              <GenreItem genre_state={genre} onClick={onGenreToggle} key={genre.genre.id} />
+            ))}
         </div>
       </motion.div>
       <div className="flex flex-row justify-end relative p-5">
-        <Button
-          variant="neon-blue"
-          onClick={() => setIsShowMore((prev) => !prev)}
-          className="absolute left-1/2 -translate-x-1/2"
-        >
+        <Button variant="neon-blue" onClick={() => setIsShowMore((prev) => !prev)} className="absolute left-1/2 -translate-x-1/2">
           {isShowMore ? "Show less" : "Show more"}
         </Button>
         <Button variant="neon-blue" onClick={onClearHandler} className="">

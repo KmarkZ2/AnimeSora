@@ -1,12 +1,14 @@
 "use client";
 
 import { userLogout } from "@/actions";
+import useProfileWindowStore from "@/store/useProfileWindowStore";
 import useUserStore from "@/store/useUserStore";
 import { UserWithProfile } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { IconType } from "react-icons";
+import { IoIosHelpCircleOutline, IoMdLogOut, IoMdSettings } from "react-icons/io";
 import { IoPersonCircleOutline } from "react-icons/io5";
 
 export default function ProfileWindow() {
@@ -23,15 +25,15 @@ export default function ProfileWindow() {
       <MenuDivider />
       <ProfileWindowListContainer>
         <ProfileWindowItem icon={IoPersonCircleOutline} text="Account" href="/profile" />
-        <ProfileWindowItem icon={IoPersonCircleOutline} text="Settings" href="/settings" />
+        <ProfileWindowItem icon={IoMdSettings} text="Settings" href="/settings" />
       </ProfileWindowListContainer>
       <MenuDivider />
       <ProfileWindowListContainer>
-        <ProfileWindowItem icon={IoPersonCircleOutline} text="Help" href="/help" />
+        <ProfileWindowItem icon={IoIosHelpCircleOutline} text="Help" href="/help" />
       </ProfileWindowListContainer>
       <MenuDivider />
       <ProfileWindowListContainer>
-        <ProfileWindowItem icon={IoPersonCircleOutline} text="Log out" onClick={onLogout} />
+        <ProfileWindowItem icon={IoMdLogOut} text="Log out" onClick={onLogout} />
       </ProfileWindowListContainer>
     </div>
   );
@@ -48,9 +50,11 @@ function ProfileWindowItem({
   href?: string;
   onClick?: () => void;
 }) {
+  const closeProfile = useProfileWindowStore((s) => s.closeWindow);
+
   if (href) {
     return (
-      <Link href={href}>
+      <Link href={href} onClick={closeProfile}>
         <li className="p-2.5 bg-transparent text-white flex items-center gap-2.5 hover:bg-[rgba(186,186,186,0.1)] rounded-[3px]">
           <Icon className="w-6 h-6" />
           {text}
