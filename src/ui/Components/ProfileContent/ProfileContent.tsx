@@ -8,14 +8,13 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import ChangeInfo from "./ChangeInfo";
-import clsx from "clsx";
 
 type ProfileContentProps = {
   initialData: UserWithProfile;
 };
 
 export default function ProfileContent({ initialData }: ProfileContentProps) {
-  const { clearUser, setUser, user } = useUserStore();
+  const { setUser, user } = useUserStore();
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   useEffect(() => {

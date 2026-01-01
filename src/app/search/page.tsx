@@ -4,7 +4,6 @@ import { Genre, GenreState } from "../../types/types";
 import SearchComponent from "@/ui/Components/Search/SearchComponent";
 import AnimeLoader from "@/ui/Components/AnimeList/AnimeLoader";
 import AnimeListSkeleton from "@/ui/AnimeListSkeleton";
-import Image from "next/image";
 
 export type SearchParameters = {
   genres: Genre[];

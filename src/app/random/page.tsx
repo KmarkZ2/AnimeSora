@@ -1,6 +1,4 @@
-import AnimePage from "@/app/animes/[id]/page";
 import { getAnimeRandom } from "../../service/apiAnimeFetch";
-import "@/app/animes/[id]/page";
 import AnimePageComponent from "@/ui/Components/AnimePageComponent";
 
 export const dynamic = "force-dynamic";

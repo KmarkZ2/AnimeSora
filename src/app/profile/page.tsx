@@ -1,7 +1,6 @@
 import { getUserProfile } from "@/actions";
 import { createClient } from "@/lib/supabase/server";
 import ProfileContent from "@/ui/Components/ProfileContent/ProfileContent";
-import ModalBg from "@/ui/ModalBg";
 import { redirect } from "next/navigation";
 
 export default async function Profile() {

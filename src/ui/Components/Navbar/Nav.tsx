@@ -1,6 +1,5 @@
 import Link from "next/link";
 import NavLinks from "./NavLinks";
-import ProfileWindow from "../ProfileWindow/ProfileWindow";
 import { User } from "@/types/types";
 import AuthButton from "../AuthButtons/AuthButton";
 import UserMenu from "../ProfileWindow/UserMenu";

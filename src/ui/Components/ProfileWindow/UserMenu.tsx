@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { RxPerson } from "react-icons/rx";
 import ProfileWindow from "./ProfileWindow";
 import clsx from "clsx";

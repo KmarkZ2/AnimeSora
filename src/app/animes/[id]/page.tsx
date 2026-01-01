@@ -1,6 +1,5 @@
 import AnimePageComponent from "@/ui/Components/AnimePageComponent";
 import { getAnimeById } from "../../../service/apiAnimeFetch";
-import Image from "next/image";
 
 type AnimePageParams = {
   params: Promise<{ id: string }>;
