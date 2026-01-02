@@ -129,7 +129,8 @@ function setAnime(data: JikanAnime): Anime {
         theme: data.themes ? data.themes.map((el) => el.name) : [],
         rating: data.rating || "N/A",
         source: data.source || "Original",
-        synopsis: data.synopsis || "No description available."
+        synopsis: data.synopsis || "No description available.",
+        score: data.score,
     }
     return anime;
 }

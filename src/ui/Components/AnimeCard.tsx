@@ -10,7 +10,7 @@ export default function AnimeCard(anime: Anime) {
           <div className="absolute top-0 bottom-0 left-0 right-0 w-full h-full group-hover:bg-[rgba(0,0,0,0.3)] z-[5] duration-200 transition-all"></div>
           <Image src={anime.image} alt={anime.title} fill className="object-cover " sizes="(max-width: 768px) 100vw, 240px" />
           <ModalBg className="absolute top-[5px] left-[5px] py-1 px-2.5 flex items-center justify-center max-w-fit z-10">
-            <span className="font-bold text-[14px] text-center text-[rgba(255,255,255,0.7)]">4.5</span>
+            <span className="font-bold text-[14px] text-center text-[rgba(255,255,255,0.7)]">{anime.score}</span>
           </ModalBg>
         </div>
         <div className="shrink-0 w-full px-1 pb-1">

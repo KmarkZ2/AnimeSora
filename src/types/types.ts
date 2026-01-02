@@ -95,7 +95,8 @@ export interface Anime {
   theme: string[],
   rating: string | null,
   source: string | null,
-  synopsis: string | null
+  synopsis: string | null,
+  score: number | null
 }
 
 export interface Genre {
