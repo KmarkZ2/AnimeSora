@@ -16,7 +16,7 @@ export default function AnimeList({ initialAnimes, loadMore }: AnimeListProps) {
   const [animes, setAnimes] = useState<Anime[]>([...initialAnimes.animelist]);
   const [page, setPage] = useState<number>(1);
   const [hasNextPage, setHasNextPage] = useState<boolean>(
-    initialAnimes.pagination.current_page !== initialAnimes.pagination.last_visible_page
+    initialAnimes.pagination.current_page !== initialAnimes.pagination.last_visible_page,
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -42,7 +42,7 @@ export default function AnimeList({ initialAnimes, loadMore }: AnimeListProps) {
           {animes.map((anime) => {
             return (
               <Link href={`./animes/${anime.id}`} key={anime.id}>
-                <AnimeCard {...anime} />
+                <AnimeCard anime={anime} />
               </Link>
             );
           })}

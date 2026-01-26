@@ -2,7 +2,7 @@ import { Anime } from "@/types/types";
 import Image from "next/image";
 import ModalBg from "../ModalBg";
 
-export default function AnimeCard(anime: Anime) {
+export default function AnimeCard({ anime }: { anime: Anime }) {
   return (
     <div className="w-60 h-96 p-2 group">
       <div className="flex flex-col items-center gap-2 w-full h-full border-none overflow-hidden p-0">

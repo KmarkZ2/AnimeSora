@@ -163,3 +163,7 @@ export interface UpdateProfileData {
   username?: string;
   avatar_url?: string;
 }
+
+type Day = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"
+
+export enum Days { "Monday" = 1, "Tuesday" = 2, "Wednesday" = 3, "Thursday" = 4, "Friday" = 5, "Saturday" = 6, "Sunday" = 0 } 

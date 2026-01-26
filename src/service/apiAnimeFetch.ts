@@ -116,6 +116,18 @@ export async function getAnimeByFilter(genres: Genre[] = [], q: string = '', pag
 
 }
 
+export async function getAnimeShudles(day: string): Promise<ApiResponse<Anime[]>> {
+    try {
+        const { data, error } = await fetcher<JikanAnimeResponse>(`/schedules?filter=${day}`);
+        if (error || !data) return { data: null, error: error }
+        const animes = data.data.map(el => setAnime(el));
+        return { data: animes };
+    } catch (err) {
+        return { data: null, error: "Error to get anime schedules" }
+    }
+}
+
+
 function setAnime(data: JikanAnime): Anime {
     const anime: Anime = {
         id: data.mal_id,
