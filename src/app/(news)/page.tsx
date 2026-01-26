@@ -1,7 +1,7 @@
 import NewsBlock from "@/ui/Components/News/News";
 
 type PageProps = {
-  searchParams: { day?: string };
+  searchParams: Promise<{ day?: string }>;
 };
 
 export default async function News({ searchParams }: PageProps) {
