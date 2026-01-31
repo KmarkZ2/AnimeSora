@@ -4,6 +4,8 @@ type PageProps = {
   searchParams: Promise<{ day?: string }>;
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function News({ searchParams }: PageProps) {
   const { day } = await searchParams;
   return (
