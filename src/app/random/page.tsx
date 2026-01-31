@@ -1,4 +1,4 @@
-import { getAnimeRandom } from "../../service/apiAnimeFetch";
+import { getAnimePlayers, getAnimeRandom } from "../../service/apiAnimeFetch";
 import AnimePageComponent from "@/ui/Components/AnimePageComponent";
 
 export const dynamic = "force-dynamic";
@@ -8,9 +8,7 @@ export default async function Random() {
 
   if (error || !anime) return <div>Error to load data</div>;
 
-  return (
-    <div>
-      <AnimePageComponent anime={anime}></AnimePageComponent>
-    </div>
-  );
+  const { data: players, error: players_error } = await getAnimePlayers(anime.id);
+
+  return <AnimePageComponent anime={anime} players={players?.players || []} />;
 }

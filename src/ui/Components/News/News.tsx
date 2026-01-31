@@ -10,7 +10,7 @@ const DaysMap = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturd
 export default function NewsBlock({ day }: { day?: string }) {
   const currentDay = day || getCurrentDay();
   return (
-    <ModalBg className="px-5 py-[50px] flex justify-center gap-8 min-w-[1320px] flex-col">
+    <ModalBg className="px-5 py-[50px] flex justify-center gap-8 min-w-[920px] max-w-[1280px] flex-col">
       <NewsDays activeDay={currentDay} />
       <Line type="horizontal" />
       <Suspense key={day} fallback={<SliderNewsSkeleton />}>
