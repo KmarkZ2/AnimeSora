@@ -18,6 +18,74 @@ type JikanImages = {
   large_image_url: string;
 };
 
+export type YummiAnime = {
+  "anime_id": number,
+  "anime_status": {
+    "title": string,
+    "class": string,
+    "alias": string,
+    "value": number
+  },
+  "anime_url": string,
+  "poster": {
+    "small": string,
+    "medium": string,
+    "big": string,
+    "huge": string,
+    "fullsize": string,
+    "mega": string
+  },
+  "rating": {
+    "counters": number,
+    "average": number
+  },
+  "title": string,
+  "type": {
+    "name": string,
+    "value": number,
+    "shortname": string
+  },
+  "year": number,
+  "description": string,
+  "views": number,
+  "season": number,
+  "min_age": {
+    "value": number,
+    "title": string,
+    "title_long": string
+  },
+  "user": {
+    "list": {
+      "is_fav": boolean,
+      "list": {
+        "title": string,
+        "href": string,
+        "id": number
+      }
+    },
+    "rating": number
+  },
+  "remote_ids": {
+    "worldart_id": number,
+    "worldart_type": string,
+    "kp_id": number,
+    "anidub_id": number,
+    "sr_id": number,
+    "anilibria_alias": string,
+    "shikimori_id": number,
+    "myanimelist_id": number
+  },
+  "top": {
+    "global": number,
+    "category": number
+  },
+  "blocked_in": string[]
+}
+
+export type YummiAnimeResponse = {
+  response: YummiAnime[];
+}
+
 // Тип аніме від Jikan
 export type JikanAnime = {
   mal_id: number;
@@ -81,6 +149,33 @@ export type JikanAnime = {
   demographics: JikanResource[];
 };
 
+export interface YummiAnimeEpisode {
+  "video_id": number,
+  "iframe_url": string,
+  "data": {
+    "player": string,
+    "dubbing": string
+  },
+  "number": string,
+  "date": number,
+  "index": number,
+  "skips": {
+    "opening": {
+      "time": number | null,
+      "length": number | null
+    },
+    "ending": {
+      "time": number | null,
+      "length": number | null
+    }
+  },
+  "views": number,
+  "duration": number
+}
+
+export interface YummiAnimeEpisodeResponse {
+  response: YummiAnimeEpisode[]
+}
 
 // === ТИП ДЛЯ APP ===
 export interface Anime {
@@ -116,6 +211,27 @@ export type AnimeListStructure = {
     current_page: number;
     items: { per_page: number };
   };
+}
+
+export type Episode = {
+  video_id: number,
+  iframe_url: string,
+  number: string,
+}
+
+export type Dubbing = {
+  name: string,
+  episodes: Episode[]
+}
+
+export type Player = {
+  name: string,
+  dubbing: Dubbing[];
+}
+
+export type AnimePlayers = {
+  anime_id: number,
+  players: Player[];
 }
 
 export type ApiResponse<T> = {

@@ -1,7 +1,8 @@
-import { Anime } from "@/types/types";
+import { Anime, AnimePlayers, Player } from "@/types/types";
 import Image from "next/image";
+import WindowPlayer from "./Player/WindowPlayer";
 
-export default function AnimePageComponent({ anime }: { anime: Anime }) {
+export default function AnimePageComponent({ anime, players }: { anime: Anime; players: Player[] | null }) {
   return (
     <div className="md:mt-[30px] mt-[15px] w-full md:pl-[100px] pl-[25px] pr-[10px] pb-[10px] min-h-screen">
       <div className="flex flex-col md:gap-[20px] gap-[10px]">
@@ -83,6 +84,9 @@ export default function AnimePageComponent({ anime }: { anime: Anime }) {
           <p className="md:text-[1.5rem] text-[1rem] md:ml-[50px] ml-[25px]">Synopsis</p>
           <p className="md:text-[1rem] text-[0.75rem] md:mt-[30px] mt-[15px]">{anime.synopsis}</p>
         </div>
+      </div>
+      <div className="mt-[50px]">
+        <WindowPlayer players={players} />
       </div>
     </div>
   );

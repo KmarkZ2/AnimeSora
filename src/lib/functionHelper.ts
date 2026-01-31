@@ -6,19 +6,8 @@ function toKeyPart(value: unknown): string {
     return String(value)
 }
 
-export function uniqueByAllKeys<T extends Record<string, unknown>>(
-    items: T[]
-): T[] {
-    const map = new Map<string, T>()
-
-    for (const item of items) {
-        const key = Object.keys(item)
-            .sort()
-            .map(k => toKeyPart(item[k]))
-            .join('|')
-
-        map.set(key, item)
-    }
-
-    return [...map.values()]
+export function uniqueByValue<T>(arr: T[]): T[] {
+    return Array.from(
+        new Map(arr.map(item => [JSON.stringify(item), item])).values()
+    );
 }
