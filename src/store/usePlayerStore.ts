@@ -8,7 +8,8 @@ interface IPlayer {
 
     setPlayer: (playerId: Player) => void,
     setDubbing: (dubbing: Dubbing) => void,
-    setEpisode: (episode: Episode) => void
+    setEpisode: (episode: Episode) => void,
+    initPlayer: (player: Player) => void
 }
 
 const usePlayerStore = create<IPlayer>((set) => ({
@@ -23,7 +24,10 @@ const usePlayerStore = create<IPlayer>((set) => ({
     },
     setEpisode: (episode: Episode) => {
         set({ episode })
+    },
+    initPlayer: (player: Player) => {
+        set({ player: player, dubbing: player.dubbing[0], episode: player.dubbing[0].episodes[0] })
     }
 }))
 
-export default usePlayerStore;
+export default usePlayerStore; 

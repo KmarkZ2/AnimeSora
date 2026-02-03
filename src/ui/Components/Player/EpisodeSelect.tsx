@@ -3,6 +3,7 @@
 import usePlayerStore from "@/store/usePlayerStore";
 import { Episode } from "@/types/types";
 import Button from "@/ui/Button";
+import Select from "@/ui/Select/Select";
 
 export default function EpisodeSelect({ episodes }: { episodes: Episode[] }) {
   const { setEpisode, episode } = usePlayerStore();
@@ -12,13 +13,5 @@ export default function EpisodeSelect({ episodes }: { episodes: Episode[] }) {
     setEpisode(episode);
   };
 
-  return (
-    <div className="flex items-center gap-5">
-      {episodes.map((el) => (
-        <Button key={el.number} variant="filter" isActive={episode?.number === el.number} onClick={() => onSetEpisode(el.number)}>
-          {el.number}
-        </Button>
-      ))}
-    </div>
-  );
+  return <Select active={episode?.number ?? ""} items={episodes.map((el) => el.number)} onSelect={onSetEpisode} text="Серия" />;
 }

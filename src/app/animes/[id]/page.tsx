@@ -1,5 +1,8 @@
 import AnimePageComponent from "@/ui/Components/AnimePageComponent";
 import { getAnimeById, getAnimePlayers } from "../../../service/apiAnimeFetch";
+import axios from "axios";
+import { AnimePlayers, Player } from "@/types/types";
+import { SoraResponse } from "@/app/api/types";
 
 type AnimePageParams = {
   params: Promise<{ id: string }>;
@@ -12,7 +15,5 @@ export default async function AnimePage({ params }: AnimePageParams) {
   const { data: anime, error } = await getAnimeById(parseInt(id));
   if (error || !anime) return <div>Error to load data</div>;
 
-  const { data: players, error: players_error } = await getAnimePlayers(parseInt(id));
-
-  return <AnimePageComponent anime={anime} players={players?.players || []} />;
+  return <AnimePageComponent anime={anime} />;
 }
