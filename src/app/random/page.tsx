@@ -8,7 +8,5 @@ export default async function Random() {
 
   if (error || !anime) return <div>Error to load data</div>;
 
-  const { data: players, error: players_error } = await getAnimePlayers(anime.id);
-
-  return <AnimePageComponent anime={anime} players={players?.players || []} />;
+  return <AnimePageComponent anime={anime} />;
 }
