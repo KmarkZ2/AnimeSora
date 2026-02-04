@@ -7,7 +7,7 @@ const JikanApi = axios.create({
     baseURL: 'https://api.jikan.moe/v4',
     timeout: 5000,
 })
-const YummiApi = axios.create({
+export const YummiApi = axios.create({
     baseURL: 'https://api.yani.tv/',
     timeout: 5_000,
     headers: {
@@ -191,7 +191,7 @@ function setAnime(data: JikanAnime): Anime {
     return anime;
 }
 
-function setEpisode(data: YummiAnimeEpisode[], anime_id: number): AnimePlayers {
+export function setEpisode(data: YummiAnimeEpisode[], anime_id: number): AnimePlayers {
     const animePlayers: AnimePlayers = {
         anime_id: anime_id,
         players: []

@@ -2,7 +2,7 @@ import { Anime, AnimePlayers, Player } from "@/types/types";
 import Image from "next/image";
 import WindowPlayer from "./Player/WindowPlayer";
 
-export default function AnimePageComponent({ anime, players }: { anime: Anime; players: Player[] | null }) {
+export default function AnimePageComponent({ anime }: { anime: Anime }) {
   return (
     <div className="md:mt-[30px] mt-[15px] w-full md:pl-[100px] pl-[25px] pr-[10px] pb-[10px] min-h-screen">
       <div className="flex flex-col md:gap-[20px] gap-[10px]">
@@ -86,7 +86,7 @@ export default function AnimePageComponent({ anime, players }: { anime: Anime; p
         </div>
       </div>
       <div className="mt-[50px]">
-        <WindowPlayer players={players} />
+        <WindowPlayer animeId={anime.id} />
       </div>
     </div>
   );

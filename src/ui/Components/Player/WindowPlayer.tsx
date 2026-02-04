@@ -1,23 +1,38 @@
 "use client";
 
-import { Player } from "@/types/types";
+import { Player, YummiAnimeEpisodeResponse } from "@/types/types";
 import DubbingSelect from "./DubbingSelect";
 import EpisodeSelect from "./EpisodeSelect";
 import PlayerSelect from "./PlayerSelect";
 import usePlayerStore from "@/store/usePlayerStore";
 import VideoPlayer from "./VideoPlayer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { fetcher, getYummiAnimeId, setEpisode, YummiApi } from "@/service/apiAnimeFetch";
 
-export default function WindowPlayer({ players }: { players: Player[] | null }) {
+export default function WindowPlayer({ animeId }: { animeId: number }) {
   const usePlayer = usePlayerStore((player) => player);
+  const [players, setPlayers] = useState<Player[]>([]);
 
   useEffect(() => {
-    if (!players || players.length === 0) return;
+    const fetchPlayers = async () => {
+      try {
+        const { data: yummi_anime_id, error: id_error } = await getYummiAnimeId(animeId);
+        if (id_error || !yummi_anime_id) return { data: null, error: id_error };
 
-    usePlayer.setPlayer(players[0]);
-    usePlayer.setDubbing(players[0].dubbing[0]);
-    usePlayer.setEpisode(players[0].dubbing[0].episodes[0]);
-  }, [players]);
+        const { data, error } = await fetcher<YummiAnimeEpisodeResponse>(`anime/${yummi_anime_id}/videos`, YummiApi);
+        if (error || !data?.response) return { data: null, error: error };
+
+        const AnimePlayers = setEpisode(data.response, yummi_anime_id);
+        setPlayers(AnimePlayers.players);
+      } catch (err) {}
+    };
+    fetchPlayers();
+    if (players && players.length > 0) {
+      usePlayer.setPlayer(players[0]);
+      usePlayer.setDubbing(players[0].dubbing[0]);
+      usePlayer.setEpisode(players[0].dubbing[0].episodes[0]);
+    }
+  }, [animeId, players]);
 
   if (!players) return <h1 className="text-2xl text-white font-bold text-center">Error to load episodes</h1>;
 
