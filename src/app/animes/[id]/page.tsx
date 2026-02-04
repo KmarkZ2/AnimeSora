@@ -1,5 +1,6 @@
 import AnimePageComponent from "@/ui/Components/AnimePageComponent";
 import { getAnimeById, getAnimePlayers } from "../../../service/apiAnimeFetch";
+
 export const revalidate = 86400;
 
 type AnimePageParams = {

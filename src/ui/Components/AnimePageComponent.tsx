@@ -86,7 +86,7 @@ export default function AnimePageComponent({ anime }: { anime: Anime }) {
         </div>
       </div>
       <div className="mt-[50px]">
-        <WindowPlayer animeId={anime.id} />
+        <WindowPlayer anime_id={anime.id} />
       </div>
     </div>
   );

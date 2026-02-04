@@ -1,3 +1,5 @@
+"use server"
+
 import axios, { AxiosInstance, AxiosStatic } from "axios";
 import axiosRetry from "axios-retry";
 import { Anime, AnimeListStructure, AnimePlayers, ApiResponse, Genre, JikanAnime, JikanAnimeResponse, JikanGenreResponse, Player, SingleJikanAnimeResponse, YummiAnimeEpisode, YummiAnimeEpisodeResponse, YummiAnimeResponse } from "../types/types";
@@ -9,9 +11,11 @@ const JikanApi = axios.create({
 })
 export const YummiApi = axios.create({
     baseURL: 'https://api.yani.tv/',
-    timeout: 5_000,
+    timeout: 5000,
     headers: {
-        "X-Application": 'qojyc15q1meuuqt6'
+        "X-Application": "qojyc15q1meuuqt6",
+        Lang: "uk",
+        accept: 'application/json'
     }
 })
 
@@ -167,7 +171,7 @@ export async function getAnimePlayers(mal_ids: number): Promise<ApiResponse<Anim
         const AnimePlayers = setEpisode(data.response, yummi_anime_id)
         return { data: AnimePlayers };
     } catch (err) {
-        return { data: null, error: "Error to get anime schedules" }
+        return { data: null, error: "Error to get anime players" }
     }
 
 }
