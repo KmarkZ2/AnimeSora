@@ -224,6 +224,8 @@ export type Dubbing = {
   episodes: Episode[]
 }
 
+export const CorrectPlayers = ["Плеер Kodik", "Плеер Aksor"];
+
 export type Player = {
   name: string,
   dubbing: Dubbing[];

@@ -1,8 +1,6 @@
-"use server"
-
 import axios, { AxiosInstance, AxiosStatic } from "axios";
 import axiosRetry from "axios-retry";
-import { Anime, AnimeListStructure, AnimePlayers, ApiResponse, Genre, JikanAnime, JikanAnimeResponse, JikanGenreResponse, Player, SingleJikanAnimeResponse, YummiAnimeEpisode, YummiAnimeEpisodeResponse, YummiAnimeResponse } from "../types/types";
+import { Anime, AnimeListStructure, AnimePlayers, ApiResponse, CorrectPlayers, Genre, JikanAnime, JikanAnimeResponse, JikanGenreResponse, Player, SingleJikanAnimeResponse, YummiAnimeEpisode, YummiAnimeEpisodeResponse, YummiAnimeResponse } from "../types/types";
 import { uniqueByValue } from "@/lib/functionHelper";
 
 const JikanApi = axios.create({
@@ -200,7 +198,7 @@ export function setEpisode(data: YummiAnimeEpisode[], anime_id: number): AnimePl
         anime_id: anime_id,
         players: []
     };
-    let Players: Player[] = data.map(el => ({ name: el.data.player, dubbing: [] }));
+    let Players: Player[] = data.map(el => ({ name: el.data.player, dubbing: [] })).filter(el => CorrectPlayers.includes(el.name));
     Players = uniqueByValue(Players);
     Players.forEach((player) => {
         data.forEach(el => el.data.player === player.name && player.dubbing.push({ name: el.data.dubbing, episodes: [] }))
