@@ -27,7 +27,7 @@ export default async function RootLayout({
         title="AnimeSora - Watch anime online"
         aria-description="Watch anime online free with subtitles"
       />
-      <meta name="google-site-verification" content="v-QrsV8J05Ur3CIvmfjrLE9ZHOFIdJ8QugzRTR-HEiI" />
+      <meta name="google-site-verification" content="uaUa6Ik1nvA96FGnZTPBhNaDl9WmyUIbyboFr_MtSvE" />
       <body>
         <Notification />
         <StoreInitializer user={userWithProfile} />
