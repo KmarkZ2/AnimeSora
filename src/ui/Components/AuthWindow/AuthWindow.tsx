@@ -28,8 +28,7 @@ export default function AuthWindow() {
 
   if (!isOpenWindow) return null;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       let result;
       setIsLoading(true);
@@ -86,21 +85,29 @@ export default function AuthWindow() {
               Register
             </ButtonAuth>
           </div>
-          <form onSubmit={handleSubmit} className="flex flex-col justify-center">
+          <form className="flex flex-col justify-center">
             <div className="flex flex-col justify-center items-center gap-[12px] mt-8">
               {authType === "register" && (
                 <Input input={username} setInput={setUsername} placeholder="Username" type="text" />
               )}
               <Input input={email} setInput={setEmail} placeholder="Email" type="email" />
-              <Input input={password} setInput={setPassword} placeholder="Passowrd" type="password" />
+              <Input
+                input={password}
+                setInput={setPassword}
+                placeholder="Passowrd"
+                type="password"
+              />
             </div>
             <Button
               variant="filter"
               isActive={true}
               className="cursor-pointer mt-5 mx-auto"
-              type="submit"
+              type="button"
+              onClick={handleSubmit}
               isLoading={isLoading}
-              disabled={authType === "login" ? !email || !password : !email || !password || !username}
+              disabled={
+                authType === "login" ? !email || !password : !email || !password || !username
+              }
             >
               {authType === "login" ? "Login" : "Register"}
             </Button>
