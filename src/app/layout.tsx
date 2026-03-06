@@ -22,13 +22,21 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="scrollbar-custom">
+      <title>AnimeSora</title>
+      <meta
+        title="AnimeSora - Watch anime online"
+        aria-description="Watch anime online free with subtitles"
+      />
+      <meta name="google-site-verification" content="v-QrsV8J05Ur3CIvmfjrLE9ZHOFIdJ8QugzRTR-HEiI" />
       <body>
         <Notification />
         <StoreInitializer user={userWithProfile} />
         <div className="flex flex-col min-h-screen">
           <AuthWindow />
           <Nav user={user} />
-          <main className="flex-1 max-w-[1440px] mx-auto px-4 md:px-8 md:mt-[50px] mt-[25px]">{children}</main>
+          <main className="flex-1 max-w-[1440px] mx-auto px-4 md:px-8 md:mt-[50px] mt-[25px]">
+            {children}
+          </main>
           <Footer />
         </div>
       </body>

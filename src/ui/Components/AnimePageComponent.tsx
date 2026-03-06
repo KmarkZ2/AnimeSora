@@ -1,4 +1,4 @@
-import { Anime, AnimePlayers, Player } from "@/types/types";
+import { Anime } from "@/types/types";
 import Image from "next/image";
 import WindowPlayer from "./Player/WindowPlayer";
 
