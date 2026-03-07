@@ -8,6 +8,11 @@ import AuthWindow from "@/ui/Components/AuthWindow/AuthWindow";
 import { getUserProfile } from "@/actions";
 import Notification from "@/ui/Notification";
 
+export const metadata = {
+  title: "AnimeSora – Watch Anime Online",
+  description: "Watch anime online free with subtitles and HD streaming",
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -23,10 +28,6 @@ export default async function RootLayout({
   return (
     <html lang="en" className="scrollbar-custom">
       <title>AnimeSora</title>
-      <meta
-        title="AnimeSora - Watch anime online"
-        aria-description="Watch anime online free with subtitles"
-      />
       <meta name="google-site-verification" content="uaUa6Ik1nvA96FGnZTPBhNaDl9WmyUIbyboFr_MtSvE" />
       <body>
         <Notification />
