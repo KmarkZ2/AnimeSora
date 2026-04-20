@@ -29,7 +29,7 @@ export default function PlayerSelect({ players }: { players: Player[] }) {
         <SelectContent position={"popper"}>
           <SelectGroup>
             {players.map((el) => (
-              <SelectItem value={el.name} onClick={() => onSetPlayer(el.name)}>
+              <SelectItem value={el.name} onClick={() => onSetPlayer(el.name)} key={el.name}>
                 {el.name}
               </SelectItem>
             ))}

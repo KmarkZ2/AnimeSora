@@ -29,7 +29,7 @@ export default function DubbingSelect({ dubbings }: { dubbings: Dubbing[] }) {
         <SelectContent position={"popper"}>
           <SelectGroup>
             {dubbings.map((el) => (
-              <SelectItem value={el.name} onClick={() => onSetDubbing(el.name)}>
+              <SelectItem value={el.name} onClick={() => onSetDubbing(el.name)} key={el.name}>
                 {el.name}
               </SelectItem>
             ))}

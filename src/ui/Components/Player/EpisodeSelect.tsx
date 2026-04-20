@@ -29,7 +29,7 @@ export default function EpisodeSelect({ episodes }: { episodes: Episode[] }) {
         <SelectContent position={"popper"}>
           <SelectGroup>
             {episodes.map((el) => (
-              <SelectItem value={el.number} onClick={() => onSetEpisode(el.number)}>
+              <SelectItem value={el.number} onClick={() => onSetEpisode(el.number)} key={el.number}>
                 {el.number}
               </SelectItem>
             ))}
