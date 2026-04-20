@@ -1,8 +1,16 @@
 "use client";
 
+import { Field } from "@/components/ui/field";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import usePlayerStore from "@/store/usePlayerStore";
 import { Player } from "@/types/types";
-import Select from "@/ui/Select/Select";
 
 export default function PlayerSelect({ players }: { players: Player[] }) {
   const { setPlayer, player } = usePlayerStore();
@@ -12,5 +20,22 @@ export default function PlayerSelect({ players }: { players: Player[] }) {
     setPlayer(player);
   };
 
-  return <Select active={player?.name || ""} items={players.map((el) => el.name)} onSelect={onSetPlayer} text="Плеер" />;
+  return (
+    <Field>
+      <Select defaultValue="banana">
+        <SelectTrigger>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent position={"popper"}>
+          <SelectGroup>
+            {players.map((el) => (
+              <SelectItem value={el.name} onClick={() => onSetPlayer(el.name)}>
+                {el.name}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </Field>
+  );
 }

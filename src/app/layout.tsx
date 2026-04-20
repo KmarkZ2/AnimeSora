@@ -1,5 +1,5 @@
+import "@/app/globals.css";
 import Nav from "@/ui/Components/Navbar/Nav";
-import "./globals.css";
 import Footer from "@/ui/Components/Footer/Footer";
 import { createClient } from "@/lib/supabase/server";
 import { UserWithProfile } from "@/types/types";
@@ -7,6 +7,10 @@ import StoreInitializer from "@/ui/Components/StoreInitializer";
 import AuthWindow from "@/ui/Components/AuthWindow/AuthWindow";
 import { getUserProfile } from "@/actions";
 import Notification from "@/ui/Notification";
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata = {
   title: "AnimeSora – Watch Anime Online",
@@ -26,7 +30,7 @@ export default async function RootLayout({
   const userWithProfile: UserWithProfile = { profile: data, user: user };
 
   return (
-    <html lang="en" className="scrollbar-custom">
+    <html lang="en" className={cn("scrollbar-custom", "font-sans", inter.variable)}>
       <title>AnimeSora</title>
       <meta name="google-site-verification" content="uaUa6Ik1nvA96FGnZTPBhNaDl9WmyUIbyboFr_MtSvE" />
       <body>
